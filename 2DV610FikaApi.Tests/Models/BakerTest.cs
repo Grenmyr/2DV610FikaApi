@@ -27,6 +27,15 @@ namespace _2DV610FikaApi.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
+        public void ShouldThrowExceptionWhenBakerNameIsMoreThanTwentyChars()
+        {
+            string toLongName = "abcdefghijklmnopqrstuvxyzåäö";
+            string validEmail = "abc@abc.com";
+            new Baker(toLongName, validEmail);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void ShouldThrowExceptionWhenBakerEmailIsLessThanFourChars()
         {
             string validName = "Olle";
