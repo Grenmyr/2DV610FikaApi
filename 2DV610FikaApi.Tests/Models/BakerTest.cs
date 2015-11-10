@@ -15,5 +15,13 @@ namespace _2DV610FikaApi.Tests
             Baker baker = new Baker(name);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ShouldThrowExceptionWhenBakerNameIsEmty()
+        {
+            string name = "";
+            Baker baker = new Baker(name);
+        }
+
     }
 }
