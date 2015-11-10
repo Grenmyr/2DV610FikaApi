@@ -34,5 +34,16 @@ namespace _2DV610FikaApi.Tests
             new Baker(validName, toShortEmail);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ShouldThrowArgumentExceptionWhenBakerEmailLengthIsMoreThen254Characters()
+        {
+            string validName = "Olle";
+            string toLongEmail = String.Format
+                ("MoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoR");
+            new Baker(validName, toLongEmail);
+        }
+
+
     }
 }
