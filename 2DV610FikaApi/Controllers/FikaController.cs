@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2DV610FikaApi.Models.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,10 +10,17 @@ namespace _2DV610FikaApi.Controllers
 {
     public class FikaController : ApiController
     {
+
+        IFikaService _service;
+
+        public FikaController(IFikaService fikaService) {
+            _service = fikaService;
+        }
+
         // GET api/<controller>
         public IHttpActionResult Get()
         {
-            return Ok("test");  
+            return Ok("test");      
         }
 
         // GET api/<controller>/5

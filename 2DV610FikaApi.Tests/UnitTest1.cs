@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using _2DV610FikaApi.Controllers;
+using _2DV610FikaApi.Models.Services;
 using System.Web.Http.Results;
 
 namespace _2DV610FikaApi.Tests
@@ -14,7 +15,8 @@ namespace _2DV610FikaApi.Tests
         [TestMethod]
         public void ShouldReturnString()
         {
-            FikaController controller = new FikaController();
+            IFikaService _service = new FikaService();
+            FikaController controller = new FikaController(_service);
             IHttpActionResult actionResult = controller.Get();
 
             var result = actionResult as OkNegotiatedContentResult<String>;
