@@ -147,6 +147,7 @@
     <Compile Include="Models\Repositories\FikaRepository.cs" />
     <Compile Include="Models\Repositories\IFikaRepository.cs" />
     <Compile Include="Models\Baker.cs" />
+    <Compile Include="Models\Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
