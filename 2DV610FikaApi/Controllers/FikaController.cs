@@ -20,7 +20,7 @@ namespace _2DV610FikaApi.Controllers
         // GET api/<controller>
         public IHttpActionResult Get()
         {
-            return Ok("test");      
+            return Ok(_service.Get());   
         }
 
         // GET api/<controller>/5

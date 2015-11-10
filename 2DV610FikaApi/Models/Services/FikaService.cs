@@ -11,7 +11,7 @@ namespace _2DV610FikaApi.Models.Services
 
         public String Get() 
         {
-            return "Test";
+            return "test";
         }
     }
 }
