@@ -11,7 +11,7 @@ namespace _2DV610FikaApi.Models
         private string email;
         public Baker(string name, string email)
         {
-            if (String.IsNullOrEmpty(name) || email.Length < 4)
+            if (String.IsNullOrEmpty(name) || email.Length < 4 || email.Length > 254)
             {
                 throw new ArgumentException();
             }
