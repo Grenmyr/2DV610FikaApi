@@ -10,7 +10,7 @@ namespace _2DV610FikaApi.Models
         private string name;
         public Baker(string name)
         {
-            if (name == null)
+            if (name == null || name == "")
             {
                 throw new ArgumentException();
             }
