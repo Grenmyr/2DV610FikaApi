@@ -10,9 +10,9 @@ namespace _2DV610FikaApi.Controllers
     public class FikaController : ApiController
     {
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public String Get()
         {
-            return new string[] { "value1", "value2" };
+            return "test";
         }
 
         // GET api/<controller>/5
