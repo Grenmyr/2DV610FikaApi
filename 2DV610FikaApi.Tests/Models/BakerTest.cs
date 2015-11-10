@@ -23,5 +23,14 @@ namespace _2DV610FikaApi.Tests
             Baker baker = new Baker(name);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ShouldThrowExceptionWhenBakerEmailIsLessThanFourChars()
+        {
+            string name = "Olle";
+            string email = "a@s";
+            new Baker(name, email);
+        }
+
     }
 }
