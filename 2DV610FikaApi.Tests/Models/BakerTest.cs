@@ -11,25 +11,27 @@ namespace _2DV610FikaApi.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void ShouldThrowExceptionWhenBakerNameIsNull()
         {
-            string name = null;
-            Baker baker = new Baker(name);
+            string nullName = null;
+            string validEmail = "abc@abc.com";
+            new Baker(nullName, validEmail);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void ShouldThrowExceptionWhenBakerNameIsEmty()
         {
-            string name = "";
-            Baker baker = new Baker(name);
+            string emtyName = "";
+            string validEmail = "abc@abc.com";
+            new Baker(emtyName, validEmail);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void ShouldThrowExceptionWhenBakerEmailIsLessThanFourChars()
         {
-            string name = "Olle";
-            string email = "a@s";
-            new Baker(name, email);
+            string validName = "Olle";
+            string toShortEmail = "a@s";
+            new Baker(validName, toShortEmail);
         }
 
     }

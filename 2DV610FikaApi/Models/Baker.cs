@@ -9,21 +9,13 @@ namespace _2DV610FikaApi.Models
     {
         private string name;
         private string email;
-        public Baker(string name)
+        public Baker(string name, string email)
         {
-            if (String.IsNullOrEmpty(name))
+            if (String.IsNullOrEmpty(name) || email.Length < 4)
             {
                 throw new ArgumentException();
             }
             this.name = name;
-        }
-
-        public Baker(string name, string email)
-        {
-            if (email.Length < 4)
-            {
-                throw new ArgumentException();
-            }
             this.email = email;
         }
     }
