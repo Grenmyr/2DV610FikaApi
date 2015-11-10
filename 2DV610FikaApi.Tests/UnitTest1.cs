@@ -6,18 +6,27 @@ using System.Web.Http;
 using _2DV610FikaApi.Controllers;
 using _2DV610FikaApi.Models.Services;
 using System.Web.Http.Results;
+using Moq;
 
 namespace _2DV610FikaApi.Tests
 {
     [TestClass]
     public class FikaControllerTest
     {
+        private Mock<IFikaService> _service;
+        private FikaController _controller;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            _service = new Mock<IFikaService>();
+            _controller = new FikaController(_service.Object);
+        }
+
         [TestMethod]
         public void ShouldReturnString()
         {
-            IFikaService _service = new FikaService();
-            FikaController controller = new FikaController(_service);
-            IHttpActionResult actionResult = controller.Get();
+            IHttpActionResult actionResult = _controller.Get();
 
             var result = actionResult as OkNegotiatedContentResult<String>;
             Assert.AreEqual("test", result.Content);
