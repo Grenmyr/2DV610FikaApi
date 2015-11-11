@@ -36,7 +36,7 @@ namespace _2DV610FikaApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void BakerControllerGetActionShouldInvokeBakerServiceGetBakersOnce()
+        public void BakerRepositoryGetBakersShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
         {
             _controller.Get();
 
