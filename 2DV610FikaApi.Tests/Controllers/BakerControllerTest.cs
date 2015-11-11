@@ -13,14 +13,20 @@ namespace _2DV610FikaApi.Tests.Controllers
     [TestClass]
     public class BakerControllerTest
     {
+        private BakerController _controller;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            _controller = new BakerController();
+        }
+
         [TestMethod]
         public void TestMethod1()
         {
-            var controller = new BakerController();
-            var allBakers = controller.Get() as OkNegotiatedContentResult<List<Baker>>;
+            var allBakers = _controller.Get() as OkNegotiatedContentResult<List<Baker>>;
 
             Assert.AreEqual(0, allBakers.Content.Count);
-            // Expect empty list if no bakers in the system.
         }
     }
 }
