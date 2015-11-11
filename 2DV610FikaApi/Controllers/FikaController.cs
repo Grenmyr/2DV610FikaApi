@@ -1,9 +1,11 @@
-﻿using _2DV610FikaApi.Models.Services;
+﻿using _2DV610FikaApi.Models;
+using _2DV610FikaApi.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace _2DV610FikaApi.Controllers
@@ -11,16 +13,26 @@ namespace _2DV610FikaApi.Controllers
     public class FikaController : ApiController
     {
 
-        IFikaService _service;
+        IFikaRepository _repository;
 
-        public FikaController(IFikaService fikaService) {
-            _service = fikaService;
+        //public FikaController(IFikaRepository fikaRepository)
+        //{
+        //    _repository = fikaRepository;
+        //}
+
+        public FikaController()
+            : this(new FikaRepository()){ }
+        public FikaController(IFikaRepository repository)
+        {
+            _repository = repository;
         }
 
         // GET api/<controller>
-        public IHttpActionResult Get()
+        public async Task<IHttpActionResult> Get()
         {
-            return Ok(_service.Get());   
+            var response = await _repository.GetFika();
+            return Ok();
+            //return Ok("test");
         }
 
         // GET api/<controller>/5
@@ -30,12 +42,14 @@ namespace _2DV610FikaApi.Controllers
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]Fika value)
         {
+            var fika = _repository.AddFika(value);
+            return Ok("fika");
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]Fika value)
         {
         }
 

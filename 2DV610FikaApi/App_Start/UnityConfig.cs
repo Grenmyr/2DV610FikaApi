@@ -1,7 +1,7 @@
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Unity.Mvc5;
-using _2DV610FikaApi.Models.Services;
+using _2DV610FikaApi.Models.Repositories;
 
 namespace _2DV610FikaApi
 {
@@ -16,7 +16,7 @@ namespace _2DV610FikaApi
 
             // e.g. container.RegisterType<ITestService, TestService>();
             
-            container.RegisterType<IFikaService, FikaService>();
+            container.RegisterType<IFikaRepository, FikaRepository>();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }
