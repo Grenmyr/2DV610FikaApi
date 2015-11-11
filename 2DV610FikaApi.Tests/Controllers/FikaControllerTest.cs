@@ -26,7 +26,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void  ShouldReturnString()
+        public void  FikaControllerShouldReturnString()
         {
             //IHttpActionResult actionResult = _controller.Get();
 
