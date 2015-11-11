@@ -13,7 +13,7 @@ namespace _2DV610FikaApi.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void ShouldThrowExceptionWhenBakerNameIsNull()
+        public void BakerShouldThrowExceptionWhenBakerNameIsNull()
         {
             string nullName = null;
             string validEmail = "abc@abc.com";
@@ -23,7 +23,7 @@ namespace _2DV610FikaApi.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void ShouldThrowExceptionWhenBakerNameIsEmty()
+        public void BakerShouldThrowExceptionWhenBakerNameIsEmty()
         {
             string emtyName = "";
             string validEmail = "abc@abc.com";
@@ -33,7 +33,7 @@ namespace _2DV610FikaApi.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void ShouldThrowExceptionWhenBakerNameIsMoreThanTwentyChars()
+        public void BakerShouldThrowExceptionWhenBakerNameIsMoreThanTwentyChars()
         {
             string toLongName = "abcdefghijklmnopqrstuvxyzåäö";
             string validEmail = "abc@abc.com";
@@ -43,7 +43,7 @@ namespace _2DV610FikaApi.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void ShouldThrowExceptionWhenBakerEmailIsLessThanFourChars()
+        public void BakerShouldThrowExceptionWhenBakerEmailIsLessThanFourChars()
         {
             string validName = "Olle";
             string toShortEmail = "a@s";
@@ -53,7 +53,7 @@ namespace _2DV610FikaApi.Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void ShouldThrowArgumentExceptionWhenBakerEmailLengthIsMoreThen254Characters()
+        public void BakerShouldThrowArgumentExceptionWhenBakerEmailLengthIsMoreThen254Characters()
         {
             string validName = "Olle";
             string toLongEmail = String.Format
@@ -63,7 +63,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void ShouldSetValidBaker()
+        public void BakerShouldSetValidBaker()
         {          
             string validName = "Olle";
             string validEmail = "abc@abc.com";

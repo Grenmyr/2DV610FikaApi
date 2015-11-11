@@ -21,5 +21,10 @@ namespace _2DV610FikaApi.Controllers
         {
             _service = service;
         }
+
+        public void Get()
+        {
+            _service.GetFikas();
+        }
     }
 }
