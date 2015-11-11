@@ -9,6 +9,7 @@ namespace _2DV610FikaApi.Tests
     [TestClass]
     public class BakerTest
     {
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void ShouldThrowExceptionWhenBakerNameIsNull()
@@ -57,9 +58,9 @@ namespace _2DV610FikaApi.Tests
 
         [TestMethod]
         public void ShouldSetValidBaker()
-        {
+        {           
             string validName = "Olle";
-            string validEmail = "abc@abc.com";            
+            string validEmail = "abc@abc.com";
             new Baker(validName, validEmail);
         }
     }

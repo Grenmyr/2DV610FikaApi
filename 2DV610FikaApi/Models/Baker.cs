@@ -21,7 +21,5 @@ namespace _2DV610FikaApi.Models
             this.name = name;
             this.email = email;
         }
-
-        
     }
 }
