@@ -7,6 +7,8 @@ using _2DV610FikaApi.Controllers;
 using _2DV610FikaApi.Models;
 using System.Web.Http.Results;
 using System.Collections.Generic;
+using _2DV610FikaApi.Models.Repositories;
+using Moq;
 
 namespace _2DV610FikaApi.Tests.Controllers
 {
@@ -21,11 +23,13 @@ namespace _2DV610FikaApi.Tests.Controllers
             _controller = new BakerController();
         }
 
+
+
         [TestMethod]
-        public void TestMethod1()
+        public void GetShouldReturnAnEmptyListOfBakers()
         {
             var allBakers = _controller.Get() as OkNegotiatedContentResult<List<Baker>>;
-
+            
             Assert.AreEqual(0, allBakers.Content.Count);
         }
     }

@@ -99,7 +99,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Fika.cs" />
+    <Compile Include="Models\Repositories\BakerRepository.cs" />
     <Compile Include="Models\Repositories\FikaRepository.cs" />
+    <Compile Include="Models\Repositories\IBakerRepository.cs" />
     <Compile Include="Models\Repositories\IFikaRepository.cs" />
     <Compile Include="Models\Baker.cs" />
     <Compile Include="Models\Extensions.cs" />
