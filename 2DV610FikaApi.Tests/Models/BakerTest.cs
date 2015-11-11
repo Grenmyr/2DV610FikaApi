@@ -63,19 +63,6 @@ namespace _2DV610FikaApi.Tests
             string validName = "Olle";
             string validEmail = "abc@abc.com";
             new Baker(validName, validEmail);
-        }
-
-        [TestMethod]
-        public void ShouldContainEmtyListOfFikas()
-        {
-            string validName = "Olle";
-            string validEmail = "abc@abc.com";
-            Baker baker = new Baker(validName, validEmail);
-            Mock<FikaRepository> mock = new Mock<FikaRepository>();
-
-            List<Fika> bakersFikasList = baker.Fikas;
-
-            mock.Verify(fr => fr.GetFikas(validEmail), Times.Once);
-        }
+        }     
     }
 }
