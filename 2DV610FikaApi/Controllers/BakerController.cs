@@ -11,7 +11,6 @@ namespace _2DV610FikaApi.Controllers
     public class BakerController : ApiController
     {
 
-
         public IHttpActionResult Get()
         {
             return Ok(new List<Baker>());
