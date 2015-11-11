@@ -67,6 +67,7 @@
     <Compile Include="Controllers\FikaControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\BakerTest.cs" />
+    <Compile Include="ServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\2DV610FikaApi\2DV610FikaApi.csproj">
