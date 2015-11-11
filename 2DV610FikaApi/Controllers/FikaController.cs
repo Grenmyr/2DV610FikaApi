@@ -15,11 +15,6 @@ namespace _2DV610FikaApi.Controllers
 
         IFikaRepository _repository;
 
-        //public FikaController(IFikaRepository fikaRepository)
-        //{
-        //    _repository = fikaRepository;
-        //}
-
         public FikaController()
             : this(new FikaRepository()){ }
         public FikaController(IFikaRepository repository)
