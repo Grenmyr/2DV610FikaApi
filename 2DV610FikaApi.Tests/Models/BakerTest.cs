@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _2DV610FikaApi.Models;
 using Moq;
 using System.Collections.Generic;
+using _2DV610FikaApi.Models.Repositories;
 
 namespace _2DV610FikaApi.Tests
 {
@@ -58,10 +59,23 @@ namespace _2DV610FikaApi.Tests
 
         [TestMethod]
         public void ShouldSetValidBaker()
-        {           
+        {          
             string validName = "Olle";
             string validEmail = "abc@abc.com";
             new Baker(validName, validEmail);
+        }
+
+        [TestMethod]
+        public void ShouldContainEmtyListOfFikas()
+        {
+            string validName = "Olle";
+            string validEmail = "abc@abc.com";
+            Baker baker = new Baker(validName, validEmail);
+            Mock<FikaRepository> mock = new Mock<FikaRepository>();
+
+            List<Fika> bakersFikasList = baker.Fikas;
+
+            mock.Verify(fr => fr.GetFikas(validEmail), Times.Once);
         }
     }
 }

@@ -21,5 +21,7 @@ namespace _2DV610FikaApi.Models
             this.name = name;
             this.email = email;
         }
+
+        public System.Collections.Generic.List<Fika> Fikas { get; set; }
     }
 }
