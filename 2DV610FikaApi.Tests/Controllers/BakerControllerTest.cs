@@ -4,6 +4,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using _2DV610FikaApi.Controllers;
+using _2DV610FikaApi.Models;
+using System.Web.Http.Results;
+using System.Collections.Generic;
 
 namespace _2DV610FikaApi.Tests.Controllers
 {
@@ -14,9 +17,9 @@ namespace _2DV610FikaApi.Tests.Controllers
         public void TestMethod1()
         {
             var controller = new BakerController();
-            var allBakers = controller.Get();
+            var allBakers = controller.Get() as OkNegotiatedContentResult<List<Baker>>;
 
-            Assert.AreEqual(0, allBakers);
+            Assert.AreEqual(0, allBakers.Content.Count);
             // Expect empty list if no bakers in the system.
         }
     }

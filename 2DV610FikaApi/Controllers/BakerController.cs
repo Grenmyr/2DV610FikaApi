@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _2DV610FikaApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,7 +12,7 @@ namespace _2DV610FikaApi.Controllers
     {
         public IHttpActionResult Get()
         {
-            return Ok();
+            return Ok(0);
         }
     }
 }
