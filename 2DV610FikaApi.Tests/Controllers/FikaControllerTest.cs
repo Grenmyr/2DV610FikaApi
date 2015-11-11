@@ -32,5 +32,14 @@ namespace _2DV610FikaApi.Tests
             //var result = actionResult as OkNegotiatedContentResult<String>;
             //Assert.AreEqual("test", result.Content);
         }
+
+        [TestMethod]
+        public void FikaControlllerGetShouldCallServiceGetFikasOnce()
+        {
+            Mock<IService> service = new Mock<IService>();
+            _controller.Get();
+
+            service.Verify(c => c.GetFikas(), Times.Once);
+        }
     }
 }
