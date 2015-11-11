@@ -1,4 +1,5 @@
-﻿using _2DV610FikaApi.Models.Repositories;
+﻿using _2DV610FikaApi.Models;
+using _2DV610FikaApi.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,17 +7,23 @@ using System.Web;
 
 namespace _2DV610FikaApi
 {
-    public class Service
+    public class Service : IService
     {
-        private IFikaRepository repository;
+        public IFikaRepository _fikaRepository;
 
-        public Service(IFikaRepository repository)
+        public Service()
         {
-            this.repository = repository;
+            _fikaRepository = new FikaRepository();
         }
+
+        public Service(IFikaRepository fikaRepository)
+        {
+            _fikaRepository = fikaRepository;
+        }
+
         public void GetFikas()
         {
-            repository.GetFikas();
+            _fikaRepository.GetFikas();
         }
     }
 }

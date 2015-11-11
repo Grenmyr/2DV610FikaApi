@@ -17,6 +17,7 @@ namespace _2DV610FikaApi.Tests
         {
             string nullName = null;
             string validEmail = "abc@abc.com";
+            
             new Baker(nullName, validEmail);
         }
 
@@ -26,6 +27,7 @@ namespace _2DV610FikaApi.Tests
         {
             string emtyName = "";
             string validEmail = "abc@abc.com";
+            
             new Baker(emtyName, validEmail);
         }
 
@@ -35,6 +37,7 @@ namespace _2DV610FikaApi.Tests
         {
             string toLongName = "abcdefghijklmnopqrstuvxyzåäö";
             string validEmail = "abc@abc.com";
+            
             new Baker(toLongName, validEmail);
         }
 
@@ -44,6 +47,7 @@ namespace _2DV610FikaApi.Tests
         {
             string validName = "Olle";
             string toShortEmail = "a@s";
+            
             new Baker(validName, toShortEmail);
         }
 
@@ -54,6 +58,7 @@ namespace _2DV610FikaApi.Tests
             string validName = "Olle";
             string toLongEmail = String.Format
                 ("MoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoR");
+            
             new Baker(validName, toLongEmail);
         }
 
@@ -62,6 +67,7 @@ namespace _2DV610FikaApi.Tests
         {          
             string validName = "Olle";
             string validEmail = "abc@abc.com";
+
             new Baker(validName, validEmail);
         }     
     }
