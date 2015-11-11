@@ -8,10 +8,6 @@ namespace _2DV610FikaApi.Models.Repositories
 {
     public class FikaRepository : IFikaRepository
     {
-
-        public FikaRepository() 
-        {
-            
-        }
+           
     }
 }

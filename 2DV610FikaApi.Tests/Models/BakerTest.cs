@@ -1,12 +1,16 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _2DV610FikaApi.Models;
+using Moq;
+using System.Collections.Generic;
+using _2DV610FikaApi.Models.Repositories;
 
 namespace _2DV610FikaApi.Tests
 {
     [TestClass]
     public class BakerTest
     {
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void ShouldThrowExceptionWhenBakerNameIsNull()
@@ -53,6 +57,12 @@ namespace _2DV610FikaApi.Tests
             new Baker(validName, toLongEmail);
         }
 
-
+        [TestMethod]
+        public void ShouldSetValidBaker()
+        {          
+            string validName = "Olle";
+            string validEmail = "abc@abc.com";
+            new Baker(validName, validEmail);
+        }     
     }
 }
