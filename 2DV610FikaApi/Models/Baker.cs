@@ -13,8 +13,8 @@ namespace _2DV610FikaApi.Models
         public Baker(string name, string email)
         {
             if (name == null 
-                || Extensions.IsWithin(name.Length , 0, 20) 
-                || Extensions.IsWithin(email.Length, 4, 254))
+                || !Extensions.IsWithin(name.Length , 1, 20) 
+                || !Extensions.IsWithin(email.Length, 4, 254))
             {
                 throw new ArgumentException();
             }

@@ -6,7 +6,7 @@ namespace _2DV610FikaApi.Models
     {
         public static bool IsWithin(this int ? value, int minimum, int maximum)
         {
-            return value >= minimum && value <= maximum;
+            return  value >= minimum && value <= maximum;
         }
     }
 }

@@ -59,7 +59,7 @@ namespace _2DV610FikaApi.Tests
         public void ShouldSetValidBaker()
         {
             string validName = "Olle";
-            string validEmail = "abc@abc.com";
+            string validEmail = "abc@abc.com";            
             new Baker(validName, validEmail);
         }
     }
