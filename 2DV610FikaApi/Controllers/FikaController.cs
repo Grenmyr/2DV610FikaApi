@@ -28,11 +28,9 @@ namespace _2DV610FikaApi.Controllers
         }
 
         // GET api/<controller>
-        public async Task<IHttpActionResult> Get()
+        public IHttpActionResult Get()
         {
-            var response = await _repository.GetFika();
-            return Ok();
-            //return Ok("test");
+            return Ok("test");
         }
 
         // GET api/<controller>/5
@@ -44,7 +42,6 @@ namespace _2DV610FikaApi.Controllers
         // POST api/<controller>
         public IHttpActionResult Post([FromBody]Fika value)
         {
-            var fika = _repository.AddFika(value);
             return Ok("fika");
         }
 
