@@ -15,12 +15,13 @@ namespace _2DV610FikaApi.Tests
     {
         private Mock<IFikaRepository> _repository;
         private FikaController _controller;
+        Mock<IService> _service;
 
         [TestInitialize]
         public void TestInitialize()
         {
             _repository = new Mock<IFikaRepository>();
-            Mock<IService> _service = new Mock<IService>();
+            _service = new Mock<IService>();
             _controller = new FikaController(_service.Object);
         }
 
@@ -36,10 +37,9 @@ namespace _2DV610FikaApi.Tests
         [TestMethod]
         public void FikaControlllerGetShouldCallServiceGetFikasOnce()
         {
-            Mock<IService> service = new Mock<IService>();
             _controller.Get();
 
-            service.Verify(c => c.GetFikas(), Times.Once);
+            _service.Verify(c => c.GetFikas(), Times.Once);
         }
     }
 }
