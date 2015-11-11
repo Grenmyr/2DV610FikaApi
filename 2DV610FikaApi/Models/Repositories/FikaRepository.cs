@@ -10,7 +10,7 @@ namespace _2DV610FikaApi.Models.Repositories
     {
         public void GetFikas()
         {
-            throw new NotImplementedException();
+            // emty
         }
     }
 }

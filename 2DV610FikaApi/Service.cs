@@ -8,14 +8,15 @@ namespace _2DV610FikaApi
 {
     public class Service
     {
+        private IFikaRepository repository;
 
         public Service(IFikaRepository repository)
         {
-            throw new NotImplementedException();
+            this.repository = repository;
         }
         public void GetFikas()
         {
-            throw new NotImplementedException();
+            repository.GetFikas();
         }
     }
 }
