@@ -20,7 +20,8 @@ namespace _2DV610FikaApi.Tests
         public void TestInitialize()
         {
             _repository = new Mock<IFikaRepository>();
-            _controller = new FikaController(_repository.Object);
+            Mock<IService> _service = new Mock<IService>();
+            _controller = new FikaController(_service.Object);
         }
 
         [TestMethod]
