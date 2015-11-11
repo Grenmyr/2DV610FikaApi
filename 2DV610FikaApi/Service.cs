@@ -10,11 +10,12 @@ namespace _2DV610FikaApi
     public class Service : IService
     {
         public IFikaRepository _fikaRepository;
-        private IBakerRepository bakerRepository;
+        private IBakerRepository _bakerRepository;
 
         public Service()
         {
             _fikaRepository = new FikaRepository();
+            _bakerRepository = new BakerRepository();
         }
 
         public Service(IFikaRepository fikaRepository)
@@ -25,12 +26,17 @@ namespace _2DV610FikaApi
         public Service(IBakerRepository bakerRepository)
         {
             // TODO: Complete member initialization
-            this.bakerRepository = bakerRepository;
+           _bakerRepository = bakerRepository;
         }
 
         public List<Fika> GetFikas()
         {
             return _fikaRepository.GetFikas();
+        }
+
+        public void GetBakers()
+        {
+            _bakerRepository.GetBakers();
         }
     }
 }

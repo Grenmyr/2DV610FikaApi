@@ -11,8 +11,16 @@ namespace _2DV610FikaApi.Controllers
     public class BakerController : ApiController
     {
 
+        private IService _service;
+
+        public BakerController(IService service)
+        {
+            _service = service;
+        }
+
         public IHttpActionResult Get()
         {
+            _service.GetBakers();
             return Ok(new List<Baker>());
         }
     }

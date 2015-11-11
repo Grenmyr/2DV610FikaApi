@@ -6,5 +6,7 @@ namespace _2DV610FikaApi
     public interface IService
     {
         List<Fika> GetFikas();
+
+        void GetBakers();
     }
 }
