@@ -23,8 +23,6 @@ namespace _2DV610FikaApi.Tests.Controllers
             _controller = new BakerController();
         }
 
-
-
         [TestMethod]
         public void GetShouldReturnAnEmptyListOfBakers()
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -7,8 +8,8 @@ namespace _2DV610FikaApi.Models
 {
     public class Baker
     {
-        private string name;
-        private string email;
+        private string _name;
+        private string _email;
 
         public Baker(string name, string email)
         {
@@ -18,10 +19,10 @@ namespace _2DV610FikaApi.Models
             {
                 throw new ArgumentException();
             }
-            this.name = name;
-            this.email = email;
+            _name = name;
+            _email = email;
         }
 
-        public System.Collections.Generic.List<Fika> Fikas { get; set; }
+        public List<Fika> Fikas { get; set; }
     }
 }
