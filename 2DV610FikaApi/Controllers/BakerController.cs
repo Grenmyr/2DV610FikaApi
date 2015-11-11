@@ -12,7 +12,7 @@ namespace _2DV610FikaApi.Controllers
     {
         public IHttpActionResult Get()
         {
-            return Ok(0);
+            return Ok(new List<Baker>());
         }
     }
 }
