@@ -28,14 +28,6 @@ namespace _2DV610FikaApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void GetShouldReturnAnEmptyListOfBakers()
-        {
-            var allBakers = _controller.Get() as OkNegotiatedContentResult<List<Baker>>;
-            
-            Assert.AreEqual(0, allBakers.Content.Count);
-        }
-
-        [TestMethod]
         public void BakerRepositoryGetBakersShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
         {
             _controller.Get();
