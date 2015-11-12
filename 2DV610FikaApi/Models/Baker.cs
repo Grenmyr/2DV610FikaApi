@@ -29,5 +29,6 @@ namespace _2DV610FikaApi.Models
         }
 
         public List<Fika> Fikas { get; set; }
+        public int Id { get; set; }
     }
 }

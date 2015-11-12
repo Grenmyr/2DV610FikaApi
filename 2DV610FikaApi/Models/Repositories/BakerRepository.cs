@@ -20,7 +20,7 @@ namespace _2DV610FikaApi.Models.Repositories
 
         public Baker AddBaker(Baker baker)
         {
-            throw new NotImplementedException();
+            return new Baker("Erik", "erik.magnusson@mail.com");
         }
     }
 }

@@ -39,7 +39,7 @@ namespace _2DV610FikaApi.Controllers
 
         public IHttpActionResult Post(Baker baker)
         {
-            throw new NotImplementedException();
+            return CreatedAtRoute("Default Api", new { id = baker.Id }, _service.AddBaker(baker));
         }
     }
 }
