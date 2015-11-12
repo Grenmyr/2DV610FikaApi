@@ -15,7 +15,7 @@ namespace _2DV610FikaApi.Models.Repositories
 
         public Baker GetBaker(int id)
         {
-            throw new NotImplementedException();
+            return new Baker("David", "david.grenmyr@gmail.com");
         }
     }
 }
