@@ -38,9 +38,15 @@ namespace _2DV610FikaApi.Tests
         [TestMethod]
         public void FikaControlllerGetshouldreturnStatusCode200()
         {
-            var result = _controller.Get();
+            /* TODO: Have not figured out how to extract Statuscode 200 from this test.
+            // Testing the route with postman clearly indicate it return a 200, but how to abstract
+            // an 200 statuscode from this test is at the moement to hard for me. 
+             * The type OkNegotiatedContentResult is basicly a 200 response + data.
+             * 
+             Test pass now, but it test more then just the statuscode and it annoyes me.*/
+            OkNegotiatedContentResult<List<Fika>> result = _controller.Get() as OkNegotiatedContentResult<List<Fika>>;
 
-            Assert.AreEqual(typeof(OkResult), result.GetType());
+            Assert.AreEqual(typeof (OkNegotiatedContentResult<List<Fika>>), result.GetType());
         }
 
         [TestMethod]
