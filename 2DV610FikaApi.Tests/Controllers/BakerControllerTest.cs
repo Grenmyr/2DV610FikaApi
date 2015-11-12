@@ -60,7 +60,7 @@ namespace _2DV610FikaApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void BakerRepositoryGetBakerByIDShouldReturnABakerForExistingId()
+        public void BakerControllerActionGetShouldReturnABakerForExistingId()
         {
             int existingBakerId = 25;
             var expectedBaker = new Baker("David", "david.grenmyr@gmail.com");
@@ -74,6 +74,7 @@ namespace _2DV610FikaApi.Tests.Controllers
 
             Assert.IsInstanceOfType(baker.Content, typeof(Baker));
         }
+
 
         [TestMethod]
         public void BakerRepositoryGetBakerByIDShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
