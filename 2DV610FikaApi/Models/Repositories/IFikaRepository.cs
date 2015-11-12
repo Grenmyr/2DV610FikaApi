@@ -9,6 +9,6 @@ namespace _2DV610FikaApi.Models.Repositories
 {
     public interface IFikaRepository
     {
-        void GetFikas();
+        List<Fika> GetFikas();
     }
 }

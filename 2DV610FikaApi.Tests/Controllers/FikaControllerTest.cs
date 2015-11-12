@@ -56,5 +56,25 @@ namespace _2DV610FikaApi.Tests
 
             Assert.AreEqual(typeof(List<Fika>), result.Content.GetType());
         }
+
+        [TestMethod]
+        public void FikaControllerShouldReturnAFikaListWithTwoFikas()
+        {
+            List<Fika> list = new List<Fika>();
+            list.Add(new Fika());
+            list.Add(new Fika());
+
+            Mock<IFikaRepository> repositoryMock = new Mock<IFikaRepository>();
+            repositoryMock.Setup(r => r.GetFikas()).Returns(list);
+
+            Service serviceStub = new Service(repositoryMock.Object);
+            FikaController controllerStub = new FikaController(serviceStub);
+
+
+            OkNegotiatedContentResult<List<Fika>> result = controllerStub.Get() as OkNegotiatedContentResult<List<Fika>>;
+
+            Assert.AreEqual(2, result.Content.Count);
+
+        }
     }
 }
