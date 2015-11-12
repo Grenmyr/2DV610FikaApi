@@ -36,5 +36,10 @@ namespace _2DV610FikaApi.Controllers
 
             return Ok(_service.GetBaker(id));
         }
+
+        public IHttpActionResult Post(Baker baker)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

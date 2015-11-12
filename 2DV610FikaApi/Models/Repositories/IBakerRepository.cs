@@ -11,5 +11,7 @@ namespace _2DV610FikaApi.Models.Repositories
         List<Baker> GetBakers();
 
         Baker GetBaker(int id);
+
+        Baker AddBaker(Baker baker);
     }
 }

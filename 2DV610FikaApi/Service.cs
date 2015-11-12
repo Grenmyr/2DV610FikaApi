@@ -43,5 +43,10 @@ namespace _2DV610FikaApi
         {
             return _bakerRepository.GetBaker(id);
         }
+
+        public Baker AddBaker(Baker baker)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

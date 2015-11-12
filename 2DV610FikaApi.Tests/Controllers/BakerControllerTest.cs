@@ -28,7 +28,7 @@ namespace _2DV610FikaApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void BakerRepositoryGetActionShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
+        public void BakerRepositoryGetBakersShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
         {
             _controller.Get();
 
@@ -91,6 +91,33 @@ namespace _2DV610FikaApi.Tests.Controllers
 
             IHttpActionResult result = bakerController.Get(nonExistingId);
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+        }
+
+        [TestMethod]
+        public void BakerRepositoryPostBakerShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
+        {
+            var bakerToAdd = new Baker("Erik", "erik.magnusson@mail.com");
+            _controller.Post(bakerToAdd);
+            _bakerRepository
+                .Verify(bakerRepository => bakerRepository.AddBaker(It.IsAny<Baker>()));
+        }
+
+        [TestMethod]
+        public void BakerControllerPostActionShouldReturnPostedBakerAsContentAndStatusCodeCreatedIfCreateIsSuccessful()
+        {
+            var bakerToAdd = new Baker("Andreas", "andreas.fridlund@mail.com");
+            var service = new Service(_bakerRepository.Object);
+            var controller = new BakerController(service);
+            _bakerRepository
+                .Setup(bakerRepository => bakerRepository.AddBaker(bakerToAdd))
+                .Returns(bakerToAdd);
+
+            var baker = controller.Post(bakerToAdd) as CreatedAtRouteNegotiatedContentResult<Baker>;
+
+            Assert.IsNotNull(baker);
+            Assert.IsNotNull(baker.Content);
+            Assert.IsInstanceOfType(baker.Content, typeof(Baker));
+
         }
     }
 }
