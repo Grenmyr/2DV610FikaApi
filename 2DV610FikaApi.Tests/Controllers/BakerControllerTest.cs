@@ -62,10 +62,17 @@ namespace _2DV610FikaApi.Tests.Controllers
         [TestMethod]
         public void BakerRepositoryGetBakerByIDShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
         {
-            int existingId = 25;
-            var baker = _controller.Get(existingId);
+            int existingBakerId = 25;
+            var expectedBaker = new Baker("David", "david.grenmyr@gmail.com");
+            _bakerRepository
+                .Setup(bakerRepository => bakerRepository.GetBaker(existingBakerId))
+                .Returns(expectedBaker);
+            var service = new Service(_bakerRepository.Object);
+            var bakerController = new BakerController(service);
 
-            Assert.IsInstanceOfType(baker, typeof(Baker));
+            var baker = bakerController.Get(existingBakerId) as OkNegotiatedContentResult<Baker>;
+
+            Assert.IsInstanceOfType(baker.Content, typeof(Baker));
         }
     }
 }
