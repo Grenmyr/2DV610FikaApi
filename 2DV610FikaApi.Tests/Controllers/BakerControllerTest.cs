@@ -78,11 +78,19 @@ namespace _2DV610FikaApi.Tests.Controllers
             Assert.IsInstanceOfType(baker.Content, typeof(Baker));
         }
 
-
         [TestMethod]
-        public void BakerRepositoryGetBakerByIdShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
+        public void BakerControllerActionGetByIdShouldReturnStatusCodeNotFoundForNonExistingId()
         {
+            int nonExistingId = 42;
+            _bakerRepository
+                .Setup(bakerRepository => bakerRepository.GetBaker(nonExistingId))
+                .Returns((Baker) null);
 
+            var service = new Service(_bakerRepository.Object);
+            var bakerController = new BakerController(service);
+
+            IHttpActionResult result = bakerController.Get(nonExistingId);
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
     }
 }
