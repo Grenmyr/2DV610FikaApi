@@ -9,5 +9,7 @@ namespace _2DV610FikaApi
         List<Fika> GetFikas();
 
         List<Baker> GetBakers();
+
+        Baker GetBaker(int id);
     }
 }

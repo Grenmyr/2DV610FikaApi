@@ -12,5 +12,10 @@ namespace _2DV610FikaApi.Models.Repositories
         {
             return new List<Baker>();
         }
+
+        public Baker GetBaker(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

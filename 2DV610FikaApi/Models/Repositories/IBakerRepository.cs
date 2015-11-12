@@ -9,5 +9,7 @@ namespace _2DV610FikaApi.Models.Repositories
     public interface IBakerRepository
     {
         List<Baker> GetBakers();
+
+        Baker GetBaker(int id);
     }
 }

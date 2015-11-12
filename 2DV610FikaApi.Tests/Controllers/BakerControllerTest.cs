@@ -58,5 +58,14 @@ namespace _2DV610FikaApi.Tests.Controllers
             Assert.AreEqual(expectedBakerList.Count, result.Content.Count);
             Assert.IsInstanceOfType(result.Content, typeof(List<Baker>));
         }
+
+        [TestMethod]
+        public void BakerRepositoryGetBakerByIDShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
+        {
+            int existingId = 25;
+            var baker = _controller.Get(existingId);
+
+            Assert.IsInstanceOfType(baker, typeof(Baker));
+        }
     }
 }
