@@ -22,9 +22,11 @@ namespace _2DV610FikaApi.Controllers
             _service = service;
         }
 
-        public void Get()
+        public IHttpActionResult Get()
         {
-            _service.GetFikas();
+            List<Fika> list = new List<Fika>();
+            list = _service.GetFikas();
+            return Ok(list);
         }
     }
 }

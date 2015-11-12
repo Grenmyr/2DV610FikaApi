@@ -9,7 +9,7 @@ namespace _2DV610FikaApi.Tests
     public class ServiceTest
     {
         [TestMethod]
-        public void ServiceShouldCallFikaRepositoryOnce()
+        public void ServiceShouldInvokeFikaRepositoryOnce()
         {
             Mock<IFikaRepository> mock = new Mock<IFikaRepository>();
             Service service = new Service(mock.Object);

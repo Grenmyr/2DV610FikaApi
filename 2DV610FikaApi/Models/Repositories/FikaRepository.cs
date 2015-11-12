@@ -8,9 +8,10 @@ namespace _2DV610FikaApi.Models.Repositories
 {
     public class FikaRepository : IFikaRepository
     {
-        public void GetFikas()
+        public List<Fika> GetFikas()
         {
-            // emty
+            // Todo: Implement a database.
+            return new List<Fika>();
         }
     }
 }

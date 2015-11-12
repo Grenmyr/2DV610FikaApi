@@ -21,9 +21,9 @@ namespace _2DV610FikaApi
             _fikaRepository = fikaRepository;
         }
 
-        public void GetFikas()
+        public List<Fika> GetFikas()
         {
-            _fikaRepository.GetFikas();
+            return _fikaRepository.GetFikas();
         }
     }
 }
