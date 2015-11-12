@@ -36,7 +36,7 @@ namespace _2DV610FikaApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void BakerControllerGetActionShouldReturnAListWithCorrectAmountOfBakers()
+        public void BakerControllerGetActionShouldReturnAListAsContentWithCorrectAmountOfBakers()
         {
             var expectedBakerList = new List<Baker>
             {
@@ -60,7 +60,7 @@ namespace _2DV610FikaApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void BakerControllerActionGetShouldReturnABakerForExistingId()
+        public void BakerControllerActionGetShouldReturnABakerAsContentForExistingId()
         {
             int existingBakerId = 25;
             var expectedBaker = new Baker("David", "david.grenmyr@gmail.com");
