@@ -26,15 +26,6 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void  FikaControllerShouldReturnString()
-        {
-            //IHttpActionResult actionResult = _controller.Get();
-
-            //var result = actionResult as OkNegotiatedContentResult<String>;
-            //Assert.AreEqual("test", result.Content);
-        }
-
-        [TestMethod]
         public void FikaControlllerGetShouldCallServiceGetFikasOnce()
         {
             _controller.Get();
