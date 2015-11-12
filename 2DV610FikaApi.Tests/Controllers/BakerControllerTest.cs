@@ -60,7 +60,7 @@ namespace _2DV610FikaApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void BakerControllerActionGetShouldReturnABakerAsContentForExistingId()
+        public void BakerControllerActionGetByIdShouldReturnABakerAsContentForExistingIdAndStatusCodeOk()
         {
             int existingBakerId = 25;
             var expectedBaker = new Baker("David", "david.grenmyr@gmail.com");
@@ -72,12 +72,15 @@ namespace _2DV610FikaApi.Tests.Controllers
 
             var baker = bakerController.Get(existingBakerId) as OkNegotiatedContentResult<Baker>;
 
+            // Assert that status code is 200 Ok
+            Assert.IsNotNull(baker);
+            Assert.IsNotNull(baker.Content);
             Assert.IsInstanceOfType(baker.Content, typeof(Baker));
         }
 
 
         [TestMethod]
-        public void BakerRepositoryGetBakerByIDShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
+        public void BakerRepositoryGetBakerByIdShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
         {
 
         }
