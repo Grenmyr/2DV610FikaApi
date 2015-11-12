@@ -41,5 +41,13 @@ namespace _2DV610FikaApi.Tests
 
             _service.Verify(c => c.GetFikas(), Times.Once);
         }
+
+        [TestMethod]
+        public void FikaControlllerGetshouldreturnStatusCode200()
+        {
+            var result = _controller.Get();
+
+            Assert.AreEqual(typeof(OkResult), result.GetType());
+        }
     }
 }
