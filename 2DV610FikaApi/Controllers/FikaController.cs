@@ -25,7 +25,7 @@ namespace _2DV610FikaApi.Controllers
         public IHttpActionResult Get()
         {
             _service.GetFikas();
-            return Ok();
+            return Ok(new List<Fika>());
         }
     }
 }
