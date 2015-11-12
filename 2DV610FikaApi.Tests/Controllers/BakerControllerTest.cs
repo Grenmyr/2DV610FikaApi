@@ -64,6 +64,7 @@ namespace _2DV610FikaApi.Tests.Controllers
             dynamic result = controller.Get() as OkNegotiatedContentResult<List<Baker>>;
 
             Assert.AreEqual(expectedBakerList.Count, result.Content.Count);
+            Assert.IsInstanceOfType(result.Content, typeof(List<Baker>));
         }
     }
 }
