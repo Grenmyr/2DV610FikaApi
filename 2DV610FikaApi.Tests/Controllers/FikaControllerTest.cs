@@ -7,6 +7,8 @@ using _2DV610FikaApi.Controllers;
 using _2DV610FikaApi.Models.Repositories;
 using System.Web.Http.Results;
 using Moq;
+using System.Collections.Generic;
+using _2DV610FikaApi.Models;
 
 namespace _2DV610FikaApi.Tests
 {
@@ -39,6 +41,14 @@ namespace _2DV610FikaApi.Tests
             var result = _controller.Get();
 
             Assert.AreEqual(typeof(OkResult), result.GetType());
+        }
+
+        [TestMethod]
+        public void FikaControlllerGetshouldreturAResponseWithAListOfTypeFika()
+        {
+            OkNegotiatedContentResult<List<Fika>> result = _controller.Get() as OkNegotiatedContentResult<List<Fika>>;
+
+            Assert.AreEqual(typeof(List<Fika>), result.Content.GetType());
         }
     }
 }
