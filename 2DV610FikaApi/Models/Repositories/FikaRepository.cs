@@ -11,7 +11,7 @@ namespace _2DV610FikaApi.Models.Repositories
         public List<Fika> GetFikas()
         {
             // Todo: Implement a database.
-            return null;
+            return new List<Fika>();
         }
     }
 }

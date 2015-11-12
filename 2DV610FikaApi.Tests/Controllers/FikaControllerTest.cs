@@ -15,24 +15,26 @@ namespace _2DV610FikaApi.Tests
     [TestClass]
     public class FikaControllerTest
     {
-        private Mock<IFikaRepository> _repository;
+        private Mock<IFikaRepository> _repository;       
+        private Mock<IService> _service;
         private FikaController _controller;
-        Mock<IService> _service;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _repository = new Mock<IFikaRepository>();
-            _service = new Mock<IService>();
-            _controller = new FikaController(_service.Object);
+           _repository = new Mock<IFikaRepository>();
+           _service = new Mock<IService>();
+           _controller = new FikaController();
         }
 
         [TestMethod]
         public void FikaControlllerGetShouldCallServiceGetFikasOnce()
         {
+            _controller = new FikaController(_service.Object);
+
             _controller.Get();
 
-            _service.Verify(c => c.GetFikas(), Times.Once);
+            _service.Verify(s => s.GetFikas(), Times.Once);
         }
 
         [TestMethod]
@@ -63,15 +65,12 @@ namespace _2DV610FikaApi.Tests
             List<Fika> list = new List<Fika>();
             list.Add(new Fika());
             list.Add(new Fika());
-
-            Mock<IFikaRepository> repositoryMock = new Mock<IFikaRepository>();
-            repositoryMock.Setup(r => r.GetFikas()).Returns(list);
-
-            Service serviceStub = new Service(repositoryMock.Object);
-            FikaController controllerStub = new FikaController(serviceStub);
+            _repository.Setup(r => r.GetFikas()).Returns(list);
+            Service serviceStub = new Service(_repository.Object);
+            FikaController _controller = new FikaController(serviceStub);
 
 
-            OkNegotiatedContentResult<List<Fika>> result = controllerStub.Get() as OkNegotiatedContentResult<List<Fika>>;
+            OkNegotiatedContentResult<List<Fika>> result = _controller.Get() as OkNegotiatedContentResult<List<Fika>>;
 
             Assert.AreEqual(2, result.Content.Count);
 
