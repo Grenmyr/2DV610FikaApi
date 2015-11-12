@@ -28,7 +28,7 @@ namespace _2DV610FikaApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void BakerRepositoryGetBakersShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
+        public void BakerRepositoryGetActionShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
         {
             _controller.Get();
 
@@ -60,7 +60,7 @@ namespace _2DV610FikaApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void BakerControllerActionGetByIdShouldReturnABakerAsContentForExistingIdAndStatusCodeOk()
+        public void BakerControllerGetBakerActionShouldReturnABakerAsContentForExistingIdAndStatusCodeOk()
         {
             int existingBakerId = 25;
             var expectedBaker = new Baker("David", "david.grenmyr@gmail.com");
@@ -79,7 +79,7 @@ namespace _2DV610FikaApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void BakerControllerActionGetByIdShouldReturnStatusCodeNotFoundForNonExistingId()
+        public void BakerControllerGetBakerActionShouldReturnStatusCodeNotFoundForNonExistingId()
         {
             int nonExistingId = 42;
             _bakerRepository
