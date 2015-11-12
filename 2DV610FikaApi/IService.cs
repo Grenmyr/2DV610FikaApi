@@ -1,8 +1,10 @@
-﻿using System;
+﻿using _2DV610FikaApi.Models;
+using System;
+using System.Collections.Generic;
 namespace _2DV610FikaApi
 {
     public interface IService
     {
-        void GetFikas();
+        List<Fika> GetFikas();
     }
 }
