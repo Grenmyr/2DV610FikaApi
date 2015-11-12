@@ -8,9 +8,9 @@ namespace _2DV610FikaApi.Models.Repositories
     public class BakerRepository : IBakerRepository
     {
 
-        public void GetBakers()
+        public List<Baker> GetBakers()
         {
-            throw new NotImplementedException();
+            return new List<Baker>();
         }
     }
 }

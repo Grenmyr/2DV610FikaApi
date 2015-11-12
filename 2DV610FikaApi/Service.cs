@@ -34,9 +34,9 @@ namespace _2DV610FikaApi
             return _fikaRepository.GetFikas();
         }
 
-        public void GetBakers()
+        public List<Baker> GetBakers()
         {
-            _bakerRepository.GetBakers();
+            return _bakerRepository.GetBakers();
         }
     }
 }

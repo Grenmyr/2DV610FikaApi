@@ -8,6 +8,6 @@ namespace _2DV610FikaApi.Models.Repositories
 {
     public interface IBakerRepository
     {
-        void GetBakers();
+        List<Baker> GetBakers();
     }
 }

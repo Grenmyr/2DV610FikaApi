@@ -42,5 +42,28 @@ namespace _2DV610FikaApi.Tests.Controllers
 
             _bakerRepository.Verify(br => br.GetBakers(), Times.Once);
         }
+
+        [TestMethod]
+        public void BakerControllerGetActionShouldReturnAListWithCorrectAmountOfBakers()
+        {
+            var expectedBakerList = new List<Baker>
+            {
+                It.IsAny<Baker>(),
+                It.IsAny<Baker>(),
+                It.IsAny<Baker>(),
+                It.IsAny<Baker>()
+            };
+
+            var service = new Mock<IService>();
+            service
+                .Setup(s => s.GetBakers())
+                .Returns(expectedBakerList);
+
+            var controller = new BakerController(service.Object);
+
+            dynamic result = controller.Get() as OkNegotiatedContentResult<List<Baker>>;
+
+            Assert.AreEqual(expectedBakerList.Count, result.Content.Count);
+        }
     }
 }
