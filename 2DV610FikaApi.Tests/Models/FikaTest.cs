@@ -7,22 +7,29 @@ namespace _2DV610FikaApi.Tests.Models
     [TestClass]
     public class FikaTest
     {
+        private DateTime _validDateTime;
+        private string _validPastry;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            _validDateTime = new DateTime();
+            _validPastry = "Dröm kakor";
+        }
         [TestMethod]
         public void FikaDatePropertyShouldExist()
         {
-            DateTime date = new DateTime();
-            Fika fika = new Fika(date);
+            Fika fika = new Fika(_validDateTime, _validPastry);
 
-            Assert.AreEqual(date, fika.Date);
+            Assert.AreEqual(_validDateTime, fika.Date);
         }
 
         [TestMethod]
         public void FikaNamePropertyShouldExist()
         {
-            string pastryName = "Dröm kakor";
-            Fika fika = new Fika(pastryName);
+            Fika fika = new Fika(_validDateTime, _validPastry);
 
-            Assert.AreEqual(pastryName, fika.Name);
+            Assert.AreEqual(_validPastry, fika.Pastry);
         }
     }
 }

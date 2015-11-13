@@ -8,18 +8,14 @@ namespace _2DV610FikaApi.Models
     public class Fika
     {
 
-        public Fika(DateTime date)
+        public Fika(DateTime date, string pastry)
         {
             Date = date;
+            Pastry = pastry;
         }
 
-        public Fika(string name)
-        {
-            // TODO: Complete member initialization
-            Name = name;
-        }
         public DateTime Date { get; set; }
 
-        public object Name { get; set; }
+        public string Pastry { get; set; }
     }
 }
