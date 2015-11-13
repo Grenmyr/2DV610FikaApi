@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Controllers\FikaControllerTest.cs" />
     <Compile Include="Controllers\BakerControllerTest.cs" />
+    <Compile Include="Models\FikaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\BakerTest.cs" />
     <Compile Include="ServiceTest.cs" />
