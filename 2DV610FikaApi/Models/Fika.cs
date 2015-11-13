@@ -7,13 +7,6 @@ namespace _2DV610FikaApi.Models
 {
     public class Fika
     {
-
-        public Fika(DateTime date, string pastry )
-        {
-            Date = date;
-            Pastry = pastry;
-        }
-
         public Fika(DateTime date, string pastry, string bakerEmail)
         {
             Date = date;
