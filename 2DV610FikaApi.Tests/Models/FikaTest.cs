@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _2DV610FikaApi.Models;
+using Moq;
 
 namespace _2DV610FikaApi.Tests.Models
 {
@@ -30,6 +31,15 @@ namespace _2DV610FikaApi.Tests.Models
             Fika fika = new Fika(_validDateTime, _validPastry);
 
             Assert.AreEqual(_validPastry, fika.Pastry);
+        }
+
+        [TestMethod]
+        public void FikaNamePropertyShouldExist()
+        {
+            string bakerEmail = "myMail@coolMail.moc";
+            Fika fika = new Fika(_validDateTime, _validPastry, bakerEmail);
+
+            Assert.AreEqual(userEmail, fika.BakerEmail);
         }
     }
 }
