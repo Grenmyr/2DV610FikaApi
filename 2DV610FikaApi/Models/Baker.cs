@@ -23,6 +23,11 @@ namespace _2DV610FikaApi.Models
             _email = email;
         }
 
+        public string Email 
+        {
+            get { return _email; }
+        }
+
         public List<Fika> Fikas { get; set; }
     }
 }

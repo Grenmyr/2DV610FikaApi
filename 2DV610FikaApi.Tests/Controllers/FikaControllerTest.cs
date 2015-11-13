@@ -63,8 +63,8 @@ namespace _2DV610FikaApi.Tests
         public void FikaControllerShouldReturnAFikaListWithTwoFikas()
         {
             List<Fika> list = new List<Fika>();
-            list.Add(new Fika());
-            list.Add(new Fika());
+            list.Add(It.IsAny<Fika>());
+            list.Add(It.IsAny<Fika>());
             _repository.Setup(r => r.GetFikas()).Returns(list);
             Service serviceStub = new Service(_repository.Object);
             FikaController _controller = new FikaController(serviceStub);
