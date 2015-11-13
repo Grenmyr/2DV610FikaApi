@@ -13,12 +13,19 @@ namespace _2DV610FikaApi
         private IBakerRepository _bakerRepository;
 
         public Service()
-            : this(new FikaRepository(), new BakerRepository())
-        {}
+        {
+            _fikaRepository = new FikaRepository();
+            _bakerRepository = new BakerRepository();
+        }
 
-        public Service(IFikaRepository fikaRepository, IBakerRepository bakerRepository)
+        public Service(IFikaRepository fikaRepository)
         {
             _fikaRepository = fikaRepository;
+        }
+
+        public Service(IBakerRepository bakerRepository)
+        {
+            // TODO: Complete member initialization
             _bakerRepository = bakerRepository;
         }
 

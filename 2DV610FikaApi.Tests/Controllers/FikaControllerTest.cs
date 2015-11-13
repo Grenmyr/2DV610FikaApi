@@ -75,14 +75,5 @@ namespace _2DV610FikaApi.Tests
             Assert.AreEqual(2, result.Content.Count);
 
         }
-
-        [TestMethod]
-        public void FikaControlllerGetShouldCallServiceGetFikasOnce()
-        {
-            Mock<IService> service = new Mock<IService>();
-            _controller.Get();
-
-            service.Verify(c => c.GetFikas(), Times.Once);
-        }
     }
 }
