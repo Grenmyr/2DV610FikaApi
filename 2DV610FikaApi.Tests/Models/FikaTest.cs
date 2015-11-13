@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _2DV610FikaApi.Models;
 using Moq;
+using System.ComponentModel.DataAnnotations;
 
 namespace _2DV610FikaApi.Tests.Models
 {
@@ -35,6 +36,16 @@ namespace _2DV610FikaApi.Tests.Models
             Assert.AreEqual(_validPastry, fika.Pastry);
         }
 
+        
+        [TestMethod]   
+        [ExpectedException(typeof(ValidationException))]
+        public void FikaPastryPropertyShouldNotAcceptNullValue()
+        {
+            Fika fika = new Fika(_validDateTime, null, _Baker.Object.Email);
+
+        }
+
+
         [TestMethod]
         public void FikaEmailPropertyShouldExist()
         {
@@ -42,5 +53,7 @@ namespace _2DV610FikaApi.Tests.Models
 
             Assert.AreEqual(_Baker.Object.Email, fika.BakerEmail);
         }
+
+        
     }
 }
