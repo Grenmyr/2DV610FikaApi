@@ -34,12 +34,12 @@ namespace _2DV610FikaApi.Tests.Models
         }
 
         [TestMethod]
-        public void FikaNamePropertyShouldExist()
+        public void FikaEmailPropertyShouldExist()
         {
             string bakerEmail = "myMail@coolMail.moc";
             Fika fika = new Fika(_validDateTime, _validPastry, bakerEmail);
 
-            Assert.AreEqual(userEmail, fika.BakerEmail);
+            Assert.AreEqual(bakerEmail, fika.BakerEmail);
         }
     }
 }
