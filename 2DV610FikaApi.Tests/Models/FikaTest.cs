@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _2DV610FikaApi.Models;
-using Moq;
 
 namespace _2DV610FikaApi.Tests.Models
 {
@@ -21,7 +20,7 @@ namespace _2DV610FikaApi.Tests.Models
         public void FikaNamePropertyShouldExist()
         {
             string pastryName = "Dröm kakor";
-            Mock<Fika> fika = new Mock<Fika>(pastryName);
+            Fika fika = new Fika(pastryName);
 
             Assert.AreEqual(pastryName, fika.Name);
         }
