@@ -16,7 +16,9 @@ namespace _2DV610FikaApi.Models
 
         public Fika(DateTime date, string pastry, string bakerEmail)
         {
-            throw new NotImplementedException();
+            Date = date;
+            Pastry = pastry;
+            BakerEmail = bakerEmail;
         }
 
         public DateTime Date { get; set; }
