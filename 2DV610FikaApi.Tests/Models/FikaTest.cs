@@ -8,7 +8,7 @@ namespace _2DV610FikaApi.Tests.Models
     public class FikaTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void FikaDatePropertyShouldExist()
         {
             DateTime date = new DateTime();
             Fika fika = new Fika(date);
