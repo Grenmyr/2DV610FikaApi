@@ -29,22 +29,12 @@ namespace _2DV610FikaApi.Tests.Models
         }
 
         [TestMethod]
-        public void FikaNamePropertyShouldExist()
+        public void FikaPastryPropertyShouldExist()
         {
             Fika fika = new Fika(_validDateTime, _validPastry, _Baker.Object.Email);
 
             Assert.AreEqual(_validPastry, fika.Pastry);
         }
-
-        
-        [TestMethod]   
-        [ExpectedException(typeof(ValidationException))]
-        public void FikaPastryPropertyShouldNotAcceptNullValue()
-        {
-            Fika fika = new Fika(_validDateTime, null, _Baker.Object.Email);
-
-        }
-
 
         [TestMethod]
         public void FikaEmailPropertyShouldExist()
