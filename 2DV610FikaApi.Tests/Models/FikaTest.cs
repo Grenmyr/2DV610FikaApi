@@ -37,8 +37,8 @@ namespace _2DV610FikaApi.Tests.Models
         [TestMethod]
         public void FikaPastryPropertyDoesNotAllowNullValues()
         {
-            Fika fika = new Fika(_validDateTime, null);
-
+            Fika fika = new Fika();
+            fika.Pastry = null;
             Assert.IsNotNull(fika.Pastry);
 
         }
@@ -46,7 +46,8 @@ namespace _2DV610FikaApi.Tests.Models
         [TestMethod]
         public void FikaPastryPropertyDoesNotAllowEmtryStringValues()
         {
-            Fika fika = new Fika(_validDateTime, String.Empty);
+            Fika fika = new Fika();
+            fika.Pastry = String.Empty;
 
             Assert.AreNotEqual(String.Empty, fika.Pastry);
 
