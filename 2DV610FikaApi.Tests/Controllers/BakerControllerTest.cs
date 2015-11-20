@@ -15,30 +15,28 @@ namespace _2DV610FikaApi.Tests.Controllers
     [TestClass]
     public class BakerControllerTest
     {
-        private Mock<IBakerRepository> _bakerRepository;
-        private IService _service;
-        private BakerController _controller;
+        Mock<IService> _service;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _bakerRepository = new Mock<IBakerRepository>();
-            _service = new Service(_bakerRepository.Object);
-            _controller = new BakerController(_service);
+            _service = new Mock<IService>();
         }
 
         [TestMethod]
-        public void BakerRepositoryGetBakersShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
+        public void BakerServiceGetBakersShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
         {
-            _controller.Get();
+            BakerController controller = new BakerController(_service.Object);
 
-            _bakerRepository.Verify(br => br.GetBakers(), Times.Once);
+            controller.Get();
+
+            _service.Verify(br => br.GetBakers(), Times.Once);
         }
 
         [TestMethod]
         public void BakerControllerGetActionShouldReturnAListAsContentWithCorrectAmountOfBakers()
         {
-            var expectedBakerList = new List<Baker>
+            List<Baker> expectedBakerList = new List<Baker>
             {
                 It.IsAny<Baker>(),
                 It.IsAny<Baker>(),
@@ -46,12 +44,11 @@ namespace _2DV610FikaApi.Tests.Controllers
                 It.IsAny<Baker>()
             };
 
-            var service = new Mock<IService>();
-            service
+            _service
                 .Setup(s => s.GetBakers())
                 .Returns(expectedBakerList);
 
-            var controller = new BakerController(service.Object);
+            BakerController controller = new BakerController(_service.Object);
 
             dynamic result = controller.Get() as OkNegotiatedContentResult<List<Baker>>;
 
@@ -63,12 +60,11 @@ namespace _2DV610FikaApi.Tests.Controllers
         public void BakerControllerGetBakerActionShouldReturnABakerAsContentForExistingIdAndStatusCodeOk()
         {
             int existingBakerId = 25;
-            var expectedBaker = new Baker("David", "david.grenmyr@gmail.com");
-            _bakerRepository
-                .Setup(bakerRepository => bakerRepository.GetBaker(existingBakerId))
+            Baker expectedBaker = new Baker("David", "david.grenmyr@gmail.com");
+            _service
+                .Setup(service => service.GetBaker(existingBakerId))
                 .Returns(expectedBaker);
-            var service = new Service(_bakerRepository.Object);
-            var bakerController = new BakerController(service);
+            BakerController bakerController = new BakerController(_service.Object);
 
             var baker = bakerController.Get(existingBakerId) as OkNegotiatedContentResult<Baker>;
 
@@ -82,42 +78,44 @@ namespace _2DV610FikaApi.Tests.Controllers
         public void BakerControllerGetBakerActionShouldReturnStatusCodeNotFoundForNonExistingId()
         {
             int nonExistingId = 42;
-            _bakerRepository
-                .Setup(bakerRepository => bakerRepository.GetBaker(nonExistingId))
+            _service
+                .Setup(service => service.GetBaker(nonExistingId))
                 .Returns((Baker) null);
 
-            var service = new Service(_bakerRepository.Object);
-            var bakerController = new BakerController(service);
+            BakerController bakerController = new BakerController(_service.Object);
 
             IHttpActionResult result = bakerController.Get(nonExistingId);
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
         [TestMethod]
-        public void BakerRepositoryPostBakerShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
+        public void BakerServicePostBakerShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
         {
-            var bakerToAdd = new Baker("Erik", "erik.magnusson@mail.com");
-            _controller.Post(bakerToAdd);
-            _bakerRepository
-                .Verify(bakerRepository => bakerRepository.AddBaker(It.IsAny<Baker>()));
+            Baker bakerToAdd = new Baker("Erik", "erik.magnusson@mail.com");
+            BakerController bakerController = new BakerController(_service.Object);
+
+            bakerController.Post(bakerToAdd);
+
+            _service
+                .Verify(service => service.AddBaker(bakerToAdd));
         }
 
         [TestMethod]
         public void BakerControllerPostActionShouldReturnPostedBakerAsContentAndStatusCodeCreatedIfCreateIsSuccessful()
         {
-            var bakerToAdd = new Baker("Andreas", "andreas.fridlund@mail.com");
-            var service = new Service(_bakerRepository.Object);
-            var controller = new BakerController(service);
-            _bakerRepository
-                .Setup(bakerRepository => bakerRepository.AddBaker(bakerToAdd))
+            Baker bakerToAdd = new Baker("Andreas", "andreas.fridlund@mail.com");
+            _service
+                .Setup(service => service.AddBaker(bakerToAdd))
                 .Returns(bakerToAdd);
-
+            var controller = new BakerController(_service.Object);
+            
             var baker = controller.Post(bakerToAdd) as CreatedAtRouteNegotiatedContentResult<Baker>;
 
             Assert.IsNotNull(baker);
             Assert.IsNotNull(baker.Content);
-            Assert.IsInstanceOfType(baker.Content, typeof(Baker));
-
+            //TODO: Break out validation of data to two seperate tests.
+            Assert.AreSame(baker.Content, bakerToAdd);
+            Assert.AreEqual(baker.Content.Email, bakerToAdd.Email);
         }
     }
 }

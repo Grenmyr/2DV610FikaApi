@@ -38,42 +38,32 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void FikaControlllerGetshouldreturnStatusCode200()
+        public void FikaControlllerGetShouldReturnOkNegotiatedContentResultContainingFikaList()
         {
-            /* TODO: Have not figured out how to extract Statuscode 200 from this test.
-            // Testing the route with postman clearly indicate it return a 200, but how to abstract
-            // an 200 statuscode from this test is at the moement to hard for me. 
-             * The type OkNegotiatedContentResult is basicly a 200 response + data.
-             * 
-             Test pass now, but it test more then just the statuscode and it annoyes me.*/
-            OkNegotiatedContentResult<List<Fika>> result = _controller.Get() as OkNegotiatedContentResult<List<Fika>>;
+            List<Fika> list = new List<Fika>();
+            _service
+                .Setup(service => service.GetFikas())
+                .Returns(list);
+            FikaController controller = new FikaController(_service.Object);
+
+            OkNegotiatedContentResult<List<Fika>> result = controller.Get() as OkNegotiatedContentResult<List<Fika>>;
 
             Assert.AreEqual(typeof (OkNegotiatedContentResult<List<Fika>>), result.GetType());
         }
 
         [TestMethod]
-        public void FikaControlllerGetshouldreturAResponseWithAListOfTypeFika()
-        {
-            OkNegotiatedContentResult<List<Fika>> result = _controller.Get() as OkNegotiatedContentResult<List<Fika>>;
-
-            Assert.AreEqual(typeof(List<Fika>), result.Content.GetType());
-        }
-
-        [TestMethod]
-        public void FikaControllerShouldReturnAFikaListWithTwoFikas()
+        public void FikaControllerShouldReturnFikaListWithTwoFikas()
         {
             List<Fika> list = new List<Fika>();
             list.Add(It.IsAny<Fika>());
             list.Add(It.IsAny<Fika>());
-            _repository.Setup(r => r.GetFikas()).Returns(list);
-            Service serviceStub = new Service(_repository.Object);
-            FikaController _controller = new FikaController(serviceStub);
-
+            _service.Setup(service => service.GetFikas()).Returns(list);
+            FikaController _controller = new FikaController(_service.Object);
 
             OkNegotiatedContentResult<List<Fika>> result = _controller.Get() as OkNegotiatedContentResult<List<Fika>>;
 
             Assert.AreEqual(2, result.Content.Count);
-
+            //TODO: Write another test checking the the returnedlist object is from the same instance.
         }
     }
 }

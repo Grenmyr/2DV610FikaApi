@@ -10,17 +10,17 @@ namespace _2DV610FikaApi.Models.Repositories
 
         public List<Baker> GetBakers()
         {
-            return new List<Baker>();
+            throw new NotImplementedException();
         }
 
         public Baker GetBaker(int id)
         {
-            return new Baker("David", "david.grenmyr@gmail.com");
+            throw new NotImplementedException();
         }
 
         public Baker AddBaker(Baker baker)
         {
-            return new Baker("Erik", "erik.magnusson@mail.com");
+            throw new NotImplementedException();
         }
     }
 }
