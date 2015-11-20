@@ -49,6 +49,7 @@ namespace _2DV610FikaApi.Tests.Models
             Fika fika = new Fika();
             fika.Pastry = String.Empty;
 
+
             Assert.AreNotEqual(String.Empty, fika.Pastry);
 
         }
