@@ -35,23 +35,21 @@ namespace _2DV610FikaApi.Tests.Models
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void FikaPastryPropertyDoesNotAllowNullValues()
         {
             Fika fika = new Fika();
-            fika.Pastry = null;
-            Assert.IsNotNull(fika.Pastry);
 
+            fika.Pastry = null;
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void FikaPastryPropertyDoesNotAllowEmtryStringValues()
         {
             Fika fika = new Fika();
+            
             fika.Pastry = String.Empty;
-
-
-            Assert.AreNotEqual(String.Empty, fika.Pastry);
-
         }
     }
 }
