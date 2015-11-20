@@ -21,7 +21,9 @@ namespace _2DV610FikaApi.Tests.Models
         [TestMethod]
         public void FikaDatePropertyShouldExist()
         {
-            Fika fika = new Fika(_validDateTime, _validPastry);
+            Fika fika = new Fika();
+            fika.Pastry = _validPastry;
+            fika.Date = _validDateTime;
 
             Assert.AreEqual(_validDateTime, fika.Date);
         }
@@ -29,7 +31,9 @@ namespace _2DV610FikaApi.Tests.Models
         [TestMethod]
         public void FikaPastryPropertyShouldExist()
         {
-            Fika fika = new Fika(_validDateTime, _validPastry);
+            Fika fika = new Fika();
+            fika.Date = _validDateTime;
+            fika.Pastry = _validPastry;
 
             Assert.AreEqual(_validPastry, fika.Pastry);
         }
