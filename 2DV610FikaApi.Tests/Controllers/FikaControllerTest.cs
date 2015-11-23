@@ -63,7 +63,20 @@ namespace _2DV610FikaApi.Tests
             OkNegotiatedContentResult<List<Fika>> result = _controller.Get() as OkNegotiatedContentResult<List<Fika>>;
 
             Assert.AreEqual(2, result.Content.Count);
-            //TODO: Write another test checking the the returnedlist object is from the same instance.
+        }
+
+        [TestMethod]
+        public void FikaControllerShouldNotReturnOkNegotiatedContentResultWhenServiceGetFikasReturnsEmtyListOfFikas()
+        {
+            List<Fika> emtyList = new List<Fika>();
+            _service
+                .Setup(service => service.GetFikas())
+                .Returns(emtyList);
+
+            FikaController _controller = new FikaController(_service.Object);
+            var result =_controller.Get() as dynamic;
+
+            Assert.AreNotEqual(typeof(OkNegotiatedContentResult<List<Fika>>), result.GetType());
         }
     }
 }
