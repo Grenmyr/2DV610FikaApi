@@ -13,10 +13,8 @@ namespace _2DV610FikaApi.Controllers
     public class FikaController : ApiController
     {
 
-        public IService _service;
+        private IService _service;
 
-        public FikaController()
-            : this(new Service()){ }
         public FikaController(IService service)
         {
             _service = service;

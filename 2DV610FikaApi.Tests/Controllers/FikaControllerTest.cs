@@ -17,22 +17,21 @@ namespace _2DV610FikaApi.Tests
     {
         private Mock<IFikaRepository> _repository;       
         private Mock<IService> _service;
-        private FikaController _controller;
+
 
         [TestInitialize]
         public void TestInitialize()
         {
            _repository = new Mock<IFikaRepository>();
            _service = new Mock<IService>();
-           _controller = new FikaController();
         }
 
         [TestMethod]
         public void FikaControlllerGetShouldCallServiceGetFikasOnce()
         {
-            _controller = new FikaController(_service.Object);
+            FikaController controller = new FikaController(_service.Object);
 
-            _controller.Get();
+            controller.Get();
 
             _service.Verify(s => s.GetFikas(), Times.Once);
         }
@@ -66,7 +65,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void FikaControllerShouldNotReturnOkNegotiatedContentResultWhenServiceGetFikasReturnsEmtyListOfFikas()
+        public void FikaControllerShouldReturnNotFoundResultWhenServiceGetFikasReturnsEmtyListOfFikas()
         {
             List<Fika> nullList = null;
             _service
@@ -74,9 +73,9 @@ namespace _2DV610FikaApi.Tests
                 .Returns(nullList);
 
             FikaController _controller = new FikaController(_service.Object);
-            var result =_controller.Get() as dynamic;
+            NotFoundResult result = _controller.Get() as NotFoundResult;
 
-            Assert.AreNotEqual(typeof(OkNegotiatedContentResult<List<Fika>>), result.GetType());
+            Assert.AreEqual(typeof(NotFoundResult), result.GetType());
         }
     }
 }
