@@ -36,17 +36,21 @@ namespace _2DV610FikaApi
 
         public List<Baker> GetBakers()
         {
-            return _bakerRepository.GetBakers();
+            var bakers = _bakerRepository.GetBakers();
+            if (bakers == null) {
+                return new List<Baker>();
+            }
+            return bakers;
         }
 
         public Baker GetBaker(int id)
         {
-            return _bakerRepository.GetBaker(id);
+            throw new NotImplementedException();
         }
 
         public Baker AddBaker(Baker baker)
         {
-            return _bakerRepository.AddBaker(baker);
+            throw new NotImplementedException();
         }
 
         public Fika GetFikaById(int id)
