@@ -26,6 +26,12 @@ namespace _2DV610FikaApi.Controllers
         {
             List<Fika> list = new List<Fika>();
             list = _service.GetFikas();
+
+            if (list == null)
+            {
+                return NotFound();
+            }
+           
             return Ok(list);
         }
     }
