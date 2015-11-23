@@ -20,7 +20,7 @@ namespace _2DV610FikaApi.Models
             }
             set
             {
-                if (String.IsNullOrEmpty(value))
+                if (value == null || !Extensions.IsWithin(value.Length, 1, 30))
                 {
                     throw new ArgumentException("Pastry value cannot be emty string or null.");
                 }

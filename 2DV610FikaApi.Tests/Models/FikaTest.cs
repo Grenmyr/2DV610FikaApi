@@ -55,5 +55,14 @@ namespace _2DV610FikaApi.Tests.Models
             
             fika.Pastry = String.Empty;
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void FikaPastryPropertyDoesNotAllowStringsLongerThen30CharactersLength()
+        {
+            Fika fika = new Fika();
+
+            fika.Pastry = "ThisisExactlythritytwocharacters";
+        }
     }
 }
