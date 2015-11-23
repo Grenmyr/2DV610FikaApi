@@ -36,7 +36,14 @@ namespace _2DV610FikaApi.Controllers
 
         public IHttpActionResult Get(int id)
         {
-            return Ok(_service.GetFikaById(id)) ;
+            Fika fika = _service.GetFikaById(id);
+
+            if (fika == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(fika);
         }
     }
 }
