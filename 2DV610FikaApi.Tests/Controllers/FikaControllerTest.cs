@@ -68,7 +68,7 @@ namespace _2DV610FikaApi.Tests
         [TestMethod]
         public void FikaControllerShouldNotReturnOkNegotiatedContentResultWhenServiceGetFikasReturnsEmtyListOfFikas()
         {
-            List<Fika> emtyList = new List<Fika>();
+            List<Fika> emtyList = null;
             _service
                 .Setup(service => service.GetFikas())
                 .Returns(emtyList);
