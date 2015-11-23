@@ -31,22 +31,22 @@ namespace _2DV610FikaApi
 
         public List<Fika> GetFikas()
         {
-            return _fikaRepository.GetFikas();
+            throw new NotImplementedException();
         }
 
         public List<Baker> GetBakers()
         {
-            return _bakerRepository.GetBakers();
+            throw new NotImplementedException();
         }
 
         public Baker GetBaker(int id)
         {
-            return _bakerRepository.GetBaker(id);
+            throw new NotImplementedException();
         }
 
         public Baker AddBaker(Baker baker)
         {
-            return _bakerRepository.AddBaker(baker);
+            throw new NotImplementedException();
         }
     }
 }
