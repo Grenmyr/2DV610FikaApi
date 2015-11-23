@@ -72,10 +72,20 @@ namespace _2DV610FikaApi.Tests
                 .Setup(service => service.GetFikas())
                 .Returns(nullList);
 
-            FikaController _controller = new FikaController(_service.Object);
-            NotFoundResult result = _controller.Get() as NotFoundResult;
+            FikaController controller = new FikaController(_service.Object);
+            NotFoundResult result = controller.Get() as NotFoundResult;
 
             Assert.AreEqual(typeof(NotFoundResult), result.GetType());
+        }
+
+        [TestMethod]
+        public void FikaControllerGetWithIntIdShouldInvokeGetFikaByIdInService()
+        {
+            FikaController controller = new FikaController(_service.Object);
+
+            controller.Get(88);
+
+            _service.Verify((s => s.GetFikaById()),Times.Once);
         }
     }
 }

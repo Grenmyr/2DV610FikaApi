@@ -32,5 +32,11 @@ namespace _2DV610FikaApi.Controllers
            
             return Ok(list);
         }
+
+
+        public void Get(int p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
