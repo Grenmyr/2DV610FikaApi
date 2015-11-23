@@ -91,22 +91,23 @@ namespace _2DV610FikaApi.Tests
         [TestMethod]
         public void FikaControllerGetWithIntIdParameterShouldReturnOkNegotiatedContentResultWithFika()
         {
-            _service.Setup(s => s.GetFikaById(8888)).Returns(It.IsAny<Fika>);
+            Fika fika = new Fika();
+            _service.Setup(s => s.GetFikaById(8888)).Returns(new Fika());
             FikaController controller = new FikaController(_service.Object);
 
-            OkNegotiatedContentResult<Fika> fika = controller.Get(88) as OkNegotiatedContentResult<Fika>;
+            OkNegotiatedContentResult<Fika> result = controller.Get(8888) as OkNegotiatedContentResult<Fika>;
 
-            Assert.AreEqual(typeof(OkNegotiatedContentResult<Fika>), fika.GetType());
+            Assert.AreEqual(typeof(OkNegotiatedContentResult<Fika>), result.GetType());
         }
 
         [TestMethod]
         public void FikaControllerGetWithIntIdParameterShouldReturnNotFoundifServiceReturnsNull()
         {
             Fika fika = null;
-            _service.Setup(s => s.GetFikaById(8888)).Returns(fika);
+            _service.Setup(s => s.GetFikaById(8)).Returns(fika);
             FikaController controller = new FikaController(_service.Object);
 
-            NotFoundResult result = controller.Get(88) as NotFoundResult;
+            NotFoundResult result = controller.Get(8) as NotFoundResult;
 
             Assert.AreEqual(typeof(NotFoundResult), result.GetType());
         }
