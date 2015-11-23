@@ -85,7 +85,7 @@ namespace _2DV610FikaApi.Tests
 
             controller.Get(88);
 
-            _service.Verify((s => s.GetFikaById()),Times.Once);
+            _service.Verify((s => s.GetFikaById(88)),Times.Once);
         }
     }
 }

@@ -14,6 +14,6 @@ namespace _2DV610FikaApi
 
         Baker AddBaker(Baker baker);
 
-        object GetFikaById();
+        object GetFikaById(int id);
     }
 }
