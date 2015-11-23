@@ -31,7 +31,7 @@ namespace _2DV610FikaApi
 
         public List<Fika> GetFikas()
         {
-            throw new NotImplementedException();
+            return _fikaRepository.GetFikas();
         }
 
         public List<Baker> GetBakers()
