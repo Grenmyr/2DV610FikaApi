@@ -17,22 +17,21 @@ namespace _2DV610FikaApi.Tests
     {
         private Mock<IFikaRepository> _repository;       
         private Mock<IService> _service;
-        private FikaController _controller;
+
 
         [TestInitialize]
         public void TestInitialize()
         {
            _repository = new Mock<IFikaRepository>();
            _service = new Mock<IService>();
-           _controller = new FikaController();
         }
 
         [TestMethod]
         public void FikaControlllerGetShouldCallServiceGetFikasOnce()
         {
-            _controller = new FikaController(_service.Object);
+            FikaController controller = new FikaController(_service.Object);
 
-            _controller.Get();
+            controller.Get();
 
             _service.Verify(s => s.GetFikas(), Times.Once);
         }
@@ -63,7 +62,54 @@ namespace _2DV610FikaApi.Tests
             OkNegotiatedContentResult<List<Fika>> result = _controller.Get() as OkNegotiatedContentResult<List<Fika>>;
 
             Assert.AreEqual(2, result.Content.Count);
-            //TODO: Write another test checking the the returnedlist object is from the same instance.
         }
+
+        [TestMethod]
+        public void FikaControllerShouldReturnNotFoundResultWhenServiceGetFikasReturnsEmtyListOfFikas()
+        {
+            List<Fika> nullList = null;
+            _service
+                .Setup(service => service.GetFikas())
+                .Returns(nullList);
+
+            FikaController controller = new FikaController(_service.Object);
+            NotFoundResult result = controller.Get() as NotFoundResult;
+
+            Assert.AreEqual(typeof(NotFoundResult), result.GetType());
+        }
+
+        [TestMethod]
+        public void FikaControllerGetWithIntIdShouldInvokeGetFikaByIdInService()
+        {
+            FikaController controller = new FikaController(_service.Object);
+
+            controller.Get(88);
+
+            _service.Verify((s => s.GetFikaById(88)),Times.Once);
+        }
+
+        [TestMethod]
+        public void FikaControllerGetWithIntIdParameterShouldReturnOkNegotiatedContentResultWithFika()
+        {
+            _service.Setup(s => s.GetFikaById(8888)).Returns(new Fika());
+            FikaController controller = new FikaController(_service.Object);
+
+            OkNegotiatedContentResult<Fika> result = controller.Get(8888) as OkNegotiatedContentResult<Fika>;
+
+            Assert.AreEqual(typeof(OkNegotiatedContentResult<Fika>), result.GetType());
+        }
+
+        [TestMethod]
+        public void FikaControllerGetWithIntIdParameterShouldReturnNotFoundifServiceReturnsNull()
+        {
+            Fika fika = null;
+            _service.Setup(s => s.GetFikaById(8)).Returns(fika);
+            FikaController controller = new FikaController(_service.Object);
+
+            NotFoundResult result = controller.Get(8) as NotFoundResult;
+
+            Assert.AreEqual(typeof(NotFoundResult), result.GetType());
+        }
+    
     }
 }

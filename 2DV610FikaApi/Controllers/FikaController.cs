@@ -13,10 +13,8 @@ namespace _2DV610FikaApi.Controllers
     public class FikaController : ApiController
     {
 
-        public IService _service;
+        private IService _service;
 
-        public FikaController()
-            : this(new Service()){ }
         public FikaController(IService service)
         {
             _service = service;
@@ -24,9 +22,27 @@ namespace _2DV610FikaApi.Controllers
 
         public IHttpActionResult Get()
         {
-            List<Fika> list = new List<Fika>();
-            list = _service.GetFikas();
+            List<Fika>  list = _service.GetFikas();
+
+            if (list == null)
+            {
+                return NotFound();
+            }
+           
             return Ok(list);
+        }
+
+
+        public IHttpActionResult Get(int id)
+        {
+            Fika fika = _service.GetFikaById(id);
+
+            if (fika == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(fika);
         }
     }
 }

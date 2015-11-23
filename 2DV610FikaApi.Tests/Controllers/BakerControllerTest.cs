@@ -97,7 +97,7 @@ namespace _2DV610FikaApi.Tests.Controllers
             bakerController.Post(bakerToAdd);
 
             _service
-                .Verify(service => service.AddBaker(bakerToAdd));
+                .Verify(service => service.AddBaker(bakerToAdd), Times.Once);
         }
 
         [TestMethod]
