@@ -36,7 +36,7 @@ namespace _2DV610FikaApi
 
         public List<Baker> GetBakers()
         {
-            throw new NotImplementedException();
+            return _bakerRepository.GetBakers();
         }
 
         public Baker GetBaker(int id)
