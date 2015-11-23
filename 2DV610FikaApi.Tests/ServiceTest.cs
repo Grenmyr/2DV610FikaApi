@@ -56,9 +56,7 @@ namespace _2DV610FikaApi.Tests
                 It.IsAny<Baker>(),
                 It.IsAny<Baker>()
             };
-
             List<Baker> expectedEmptyList = new List<Baker>();
-
             Mock<IBakerRepository> mock = new Mock<IBakerRepository>();
             Service service = new Service(mock.Object);
             mock
@@ -71,6 +69,23 @@ namespace _2DV610FikaApi.Tests
 
             Assert.AreEqual(expectedPopulatedList.Count, populatedResult.Count);
             Assert.AreEqual(expectedEmptyList.Count, emptyResult.Count);
+        }
+
+        [TestMethod]
+        public void ServiceGetBakersShouldNotReturnANullValue()
+        {
+            List<Baker> nullValue = (List<Baker>)null;
+            List<Baker> expectedList = new List<Baker>();
+            Mock<IBakerRepository> mock = new Mock<IBakerRepository>();
+            Service service = new Service(mock.Object);
+            mock
+                .Setup(repository => repository.GetBakers())
+                .Returns(nullValue);
+
+            List<Baker> result = service.GetBakers();
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(expectedList.Count, result.Count);
         }
     }
 }
