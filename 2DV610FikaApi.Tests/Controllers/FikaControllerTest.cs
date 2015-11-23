@@ -96,7 +96,7 @@ namespace _2DV610FikaApi.Tests
 
             OkNegotiatedContentResult<Fika> fika = controller.Get(88) as OkNegotiatedContentResult<Fika>;
 
-            Assert.Equals(typeof(OkNegotiatedContentResult<Fika>), fika.Content.GetType());
+            Assert.AreEqual(typeof(OkNegotiatedContentResult<Fika>), fika.GetType());
         }
     }
 }
