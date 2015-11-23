@@ -36,7 +36,7 @@ namespace _2DV610FikaApi.Controllers
 
         public void Get(int p)
         {
-            throw new NotImplementedException();
+            _service.GetFikaById();
         }
     }
 }
