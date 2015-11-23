@@ -34,5 +34,43 @@ namespace _2DV610FikaApi.Tests
             List<Fika> result = service.GetFikas();
             Assert.AreSame(emptyList, result);
         }
+
+        [TestMethod]
+        public void ServiceGetBakersShouldInvokeRepositoryGetBakersOnce()
+        {
+            Mock<IBakerRepository> mock = new Mock<IBakerRepository>();
+            Service service = new Service(mock.Object);
+
+            service.GetBakers();
+
+            mock.Verify(s => s.GetBakers(), Times.Once);
+        }
+
+        [TestMethod]
+        public void ServiceGetBakersShouldReturnExpectedBakerList()
+        {
+            List<Baker> expectedPopulatedList = new List<Baker>
+            {
+                It.IsAny<Baker>(),
+                It.IsAny<Baker>(),
+                It.IsAny<Baker>(),
+                It.IsAny<Baker>()
+            };
+
+            List<Baker> expectedEmptyList = new List<Baker>();
+
+            Mock<IBakerRepository> mock = new Mock<IBakerRepository>();
+            Service service = new Service(mock.Object);
+            mock
+                .SetupSequence(repository => repository.GetBakers())
+                .Returns(expectedPopulatedList)
+                .Returns(expectedEmptyList);
+
+            List<Baker> populatedResult = service.GetBakers();
+            List<Baker> emptyResult = service.GetBakers();
+
+            Assert.AreEqual(expectedPopulatedList.Count, populatedResult.Count);
+            Assert.AreEqual(expectedEmptyList.Count, emptyResult.Count);
+        }
     }
 }
