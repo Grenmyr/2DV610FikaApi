@@ -16,19 +16,19 @@ namespace _2DV610FikaApi.Tests.Controllers
     public class BakerControllerTest
     {
         Mock<IService> _service;
+        BakerController _controller;
 
         [TestInitialize]
         public void TestInitialize()
         {
             _service = new Mock<IService>();
+            _controller = new BakerController(_service.Object);
         }
 
         [TestMethod]
         public void BakerServiceGetBakersShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
         {
-            BakerController controller = new BakerController(_service.Object);
-
-            controller.Get();
+            _controller.Get();
 
             _service.Verify(br => br.GetBakers(), Times.Once);
         }
@@ -48,9 +48,7 @@ namespace _2DV610FikaApi.Tests.Controllers
                 .Setup(s => s.GetBakers())
                 .Returns(expectedBakerList);
 
-            BakerController controller = new BakerController(_service.Object);
-
-            dynamic result = controller.Get() as OkNegotiatedContentResult<List<Baker>>;
+            dynamic result = _controller.Get() as OkNegotiatedContentResult<List<Baker>>;
 
             Assert.AreEqual(expectedBakerList.Count, result.Content.Count);
             Assert.IsInstanceOfType(result.Content, typeof(List<Baker>));
@@ -64,9 +62,8 @@ namespace _2DV610FikaApi.Tests.Controllers
             _service
                 .Setup(service => service.GetBaker(existingBakerId))
                 .Returns(expectedBaker);
-            BakerController bakerController = new BakerController(_service.Object);
 
-            var baker = bakerController.Get(existingBakerId) as OkNegotiatedContentResult<Baker>;
+            var baker = _controller.Get(existingBakerId) as OkNegotiatedContentResult<Baker>;
 
             // Assert that status code is 200 Ok
             Assert.IsNotNull(baker);
@@ -82,9 +79,7 @@ namespace _2DV610FikaApi.Tests.Controllers
                 .Setup(service => service.GetBaker(nonExistingId))
                 .Returns((Baker) null);
 
-            BakerController bakerController = new BakerController(_service.Object);
-
-            IHttpActionResult result = bakerController.Get(nonExistingId);
+            IHttpActionResult result = _controller.Get(nonExistingId);
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
@@ -92,9 +87,8 @@ namespace _2DV610FikaApi.Tests.Controllers
         public void BakerServicePostBakerShouldBeInvokedOnceWhenBakerControllerGetActionIsCalled()
         {
             Baker bakerToAdd = new Baker("Erik", "erik.magnusson@mail.com");
-            BakerController bakerController = new BakerController(_service.Object);
 
-            bakerController.Post(bakerToAdd);
+            _controller.Post(bakerToAdd);
 
             _service
                 .Verify(service => service.AddBaker(bakerToAdd), Times.Once);
@@ -107,9 +101,8 @@ namespace _2DV610FikaApi.Tests.Controllers
             _service
                 .Setup(service => service.AddBaker(bakerToAdd))
                 .Returns(bakerToAdd);
-            var controller = new BakerController(_service.Object);
-            
-            var baker = controller.Post(bakerToAdd) as CreatedAtRouteNegotiatedContentResult<Baker>;
+
+            var baker = _controller.Post(bakerToAdd) as CreatedAtRouteNegotiatedContentResult<Baker>;
 
             Assert.IsNotNull(baker);
             Assert.IsNotNull(baker.Content);
@@ -121,9 +114,7 @@ namespace _2DV610FikaApi.Tests.Controllers
         [TestMethod]
         public void BakerServiceDeleteBakerShouldBeInvokedOnceWhenBakerControllerDeleteActionIsCalled()
         {
-            BakerController controller = new BakerController(_service.Object);
-
-            controller.Delete(It.IsAny<int>());
+            _controller.Delete(It.IsAny<int>());
 
             _service
                 .Verify(service => service.DeleteBaker(It.IsAny<int>()), Times.Once);
@@ -137,9 +128,8 @@ namespace _2DV610FikaApi.Tests.Controllers
             _service
                 .Setup(service => service.DeleteBaker(existingId))
                 .Returns(existingBaker);
-            BakerController controller = new BakerController(_service.Object);
 
-            IHttpActionResult result = controller.Delete(existingId);
+            IHttpActionResult result = _controller.Delete(existingId);
 
             Assert.IsInstanceOfType(result, typeof(OkResult));
         }
@@ -153,9 +143,8 @@ namespace _2DV610FikaApi.Tests.Controllers
             _service
                 .Setup(service => service.DeleteBaker(existingId))
                 .Returns(existingBaker);
-            BakerController controller = new BakerController(_service.Object);
 
-            IHttpActionResult result = controller.Delete(nonExistingId);
+            IHttpActionResult result = _controller.Delete(nonExistingId);
 
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
