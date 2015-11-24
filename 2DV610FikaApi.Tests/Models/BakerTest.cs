@@ -4,6 +4,7 @@ using _2DV610FikaApi.Models;
 using Moq;
 using System.Collections.Generic;
 using _2DV610FikaApi.Models.Repositories;
+using System.ComponentModel.DataAnnotations;
 
 namespace _2DV610FikaApi.Tests
 {
@@ -12,54 +13,74 @@ namespace _2DV610FikaApi.Tests
     {
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void BakerShouldThrowExceptionWhenBakerNameIsNull()
         {
             string nullName = null;
-            string validEmail = "abc@abc.com";
-            
-            new Baker(nullName, validEmail);
+            string validEmail = "abc@abc.com";          
+            Baker baker = new Baker(nullName, validEmail);
+
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+            bool actual = Validator.TryValidateObject(baker, new ValidationContext(baker), validationResults, true);
+
+            Assert.IsFalse(actual);
+            Assert.AreEqual(1, validationResults.Count);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void BakerShouldThrowExceptionWhenBakerNameIsEmty()
         {
             string emtyName = "";
-            string validEmail = "abc@abc.com";
-            
-            new Baker(emtyName, validEmail);
+            string validEmail = "abc@abc.com";           
+            Baker baker = new Baker(emtyName, validEmail);
+
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+            bool actual = Validator.TryValidateObject(baker, new ValidationContext(baker), validationResults, true);
+
+            Assert.IsFalse(actual);
+            Assert.AreEqual(1, validationResults.Count);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void BakerShouldThrowExceptionWhenBakerNameIsMoreThanTwentyChars()
         {
             string toLongName = "abcdefghijklmnopqrstuvxyzåäö";
-            string validEmail = "abc@abc.com";
-            
-            new Baker(toLongName, validEmail);
+            string validEmail = "abc@abc.com";            
+            Baker baker = new Baker(toLongName, validEmail);
+
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+            bool actual = Validator.TryValidateObject(baker, new ValidationContext(baker), validationResults, true);
+
+            Assert.IsFalse(actual);
+            Assert.AreEqual(1, validationResults.Count);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void BakerShouldThrowExceptionWhenBakerEmailIsLessThanFourChars()
         {
             string validName = "Olle";
-            string toShortEmail = "a@s";
-            
-            new Baker(validName, toShortEmail);
+            string toShortEmail = "a@s";           
+            Baker baker = new Baker(validName, toShortEmail);
+
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+            bool actual = Validator.TryValidateObject(baker, new ValidationContext(baker), validationResults, true);
+
+            Assert.IsFalse(actual);
+            Assert.AreEqual(1, validationResults.Count);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void BakerShouldThrowArgumentExceptionWhenBakerEmailLengthIsMoreThen254Characters()
         {
             string validName = "Olle";
             string toLongEmail = String.Format
-                ("MoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoR");
-            
-            new Baker(validName, toLongEmail);
+                ("MoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoreThen254CharactersMoR");         
+            Baker baker = new Baker(validName, toLongEmail);
+
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+            bool actual = Validator.TryValidateObject(baker, new ValidationContext(baker), validationResults, true);
+
+            Assert.IsFalse(actual);
+            Assert.AreEqual(1, validationResults.Count);
         }
 
         [TestMethod]
@@ -67,8 +88,13 @@ namespace _2DV610FikaApi.Tests
         {          
             string validName = "Olle";
             string validEmail = "abc@abc.com";
+            Baker baker = new Baker(validName, validEmail);
 
-            new Baker(validName, validEmail);
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+            bool actual = Validator.TryValidateObject(baker, new ValidationContext(baker), validationResults, true);
+
+            Assert.IsTrue(actual);
+            Assert.AreEqual(0, validationResults.Count);
         }     
     }
 }
