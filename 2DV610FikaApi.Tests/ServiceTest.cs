@@ -98,5 +98,18 @@ namespace _2DV610FikaApi.Tests
 
             _bakerMock.Verify(bakerRepository => bakerRepository.AddBaker(It.IsAny<Baker>()), Times.Once);
         }
+
+        [TestMethod]
+        public void ServicePostBakerShouldReturnABaker()
+        {
+            Baker bakerToAdd = new Baker("Andreas", "andreas.fridlund@mail.com");
+            _bakerMock
+                .Setup(bakerRepository => bakerRepository.AddBaker(bakerToAdd))
+                .Returns(bakerToAdd);
+
+            Baker result = _bakerService.AddBaker(bakerToAdd);
+
+            Assert.AreSame(bakerToAdd, result);
+        }
     }
 }
