@@ -90,5 +90,64 @@ namespace _2DV610FikaApi.Tests
             Assert.IsNotNull(result);
             Assert.AreEqual(expectedList.Count, result.Count);
         }
+
+        [TestMethod]
+        public void ServiceGetBakerMethodShouldInvokeRepositoryGetBakerOnce()
+        {
+            _bakerService.GetBaker(It.IsAny<int>());
+
+            _bakerMock.Verify(bakerRepository => bakerRepository.GetBaker(It.IsAny<int>()), Times.Once);
+        }
+
+        [TestMethod]
+        public void ServiceGetBakerMethodShouldReturnBakerForExistingId()
+        {
+            int existingBakerId = 20;
+            Baker expectedBaker = new Baker("David", "david.grenmyr@gmail.com");
+            _bakerMock
+                .Setup(service => service.GetBaker(existingBakerId))
+                .Returns(expectedBaker);
+
+            var baker = _bakerService.GetBaker(existingBakerId);
+
+            Assert.AreSame(expectedBaker, baker);
+        }
+
+        [TestMethod]
+        public void ServiceGetBakerMethodShouldReturnNullForNonExistingId()
+        {
+            int nonExistingId = 15;
+            Baker expectedBaker = null;
+            _bakerMock
+                .Setup(service => service.GetBaker(nonExistingId))
+                .Returns((Baker)null);
+
+            var baker = _bakerService.GetBaker(nonExistingId);
+
+            Assert.AreSame(expectedBaker, baker);
+        }
+
+        [TestMethod]
+        public void ServiceAddBakerShouldInvokeRepositoryPostBakerOnce()
+        {
+            _bakerService.AddBaker(It.IsAny<Baker>());
+
+            _bakerMock.Verify(bakerRepository => bakerRepository.AddBaker(It.IsAny<Baker>()), Times.Once);
+        }
+
+        [TestMethod]
+        public void ServiceAddBakerShouldReturnABaker()
+        {
+            Baker bakerToAdd = new Baker("Andreas", "andreas.fridlund@mail.com");
+            _bakerMock
+                .Setup(bakerRepository => bakerRepository.AddBaker(bakerToAdd))
+                .Returns(bakerToAdd);
+
+            Baker result = _bakerService.AddBaker(bakerToAdd);
+
+            Assert.AreSame(bakerToAdd, result);
+        }
+
+
     }
 }
