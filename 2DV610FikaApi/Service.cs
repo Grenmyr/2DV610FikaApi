@@ -70,9 +70,8 @@ namespace _2DV610FikaApi
             if (baker != null)
             {
                 _bakerRepository.DeleteBaker(baker);
-                return baker;
             }
-            throw new NotImplementedException();
+            return baker;
         }
     }
 }
