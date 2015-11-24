@@ -137,6 +137,17 @@ namespace _2DV610FikaApi.Tests
 
             Assert.AreEqual(fika, result.Content);
         }
+
+        [TestMethod]
+        public void FikaControllerShouldReturnBadRequestWhenModelStateIsNotValid()
+        {
+            Fika fikaWithIllegalPastryProperty = new Fika();
+            FikaController controller = new FikaController(_service.Object);
+
+            BadRequestResult result = controller.Post(fikaWithIllegalPastryProperty) as BadRequestResult;
+
+            Assert.AreEqual(typeof(BadRequestResult), result.GetType());
+        }
     
     }
 }
