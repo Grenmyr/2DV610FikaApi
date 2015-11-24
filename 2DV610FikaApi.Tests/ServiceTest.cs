@@ -176,7 +176,8 @@ namespace _2DV610FikaApi.Tests
 
             Baker baker = _bakerService.DeleteBaker(nonExistingId);
 
-            Assert.AreSame(expectedBaker, baker);
+            Assert.IsNull(baker);
+            Assert.AreNotSame(expectedBaker, baker);
         }
 
         [TestMethod]
