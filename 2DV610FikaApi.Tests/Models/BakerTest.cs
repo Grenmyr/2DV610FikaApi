@@ -13,7 +13,7 @@ namespace _2DV610FikaApi.Tests
     {
 
         [TestMethod]
-        public void BakerShouldThrowExceptionWhenBakerNameIsNull()
+        public void BakerEmailPropertyDoesNotAllowNullValues()
         {
             string nullName = null;
             string validEmail = "abc@abc.com";          
@@ -27,7 +27,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void BakerShouldThrowExceptionWhenBakerNameIsEmty()
+        public void BakerNamePropertyDoesNotAllowEmtyStrings()
         {
             string emtyName = "";
             string validEmail = "abc@abc.com";           
@@ -41,7 +41,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void BakerShouldThrowExceptionWhenBakerNameIsMoreThanTwentyChars()
+        public void BakerNamePropertyDoesNotAllowStringsLongerThenThanTwentyChars()
         {
             string toLongName = "abcdefghijklmnopqrstuvxyzåäö";
             string validEmail = "abc@abc.com";            
@@ -55,7 +55,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void BakerShouldThrowExceptionWhenBakerEmailIsLessThanFourChars()
+        public void BakerEmailPropertyDoesNotAllowStringsShorterThenFourChracters()
         {
             string validName = "Olle";
             string toShortEmail = "a@s";           
@@ -69,7 +69,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void BakerShouldThrowArgumentExceptionWhenBakerEmailLengthIsMoreThen254Characters()
+        public void BakerEmailPropertyDoesNotAllowMoreThen254Characters()
         {
             string validName = "Olle";
             string toLongEmail = String.Format

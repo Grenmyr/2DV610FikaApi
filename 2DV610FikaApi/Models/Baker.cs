@@ -10,13 +10,11 @@ namespace _2DV610FikaApi.Models
     public class Baker
     {
      
-
         public Baker(string name, string email)
         {
             Name = name;
             Email = email;
         }
-
     
         [Required(ErrorMessage="Email can not be null.")]
         [MinLength(4,ErrorMessage="Email need to be atleast 4 characters long.")]
@@ -27,7 +25,6 @@ namespace _2DV610FikaApi.Models
         [MinLength(1, ErrorMessage = "Name need to be atleast 1 characters long.")]
         [MaxLength(20, ErrorMessage = "Name can not be longer then 20 characters.")]
         public string Name { get; set; }
-
 
         public int Id { get; set; }
 
