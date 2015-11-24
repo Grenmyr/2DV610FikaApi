@@ -168,16 +168,16 @@ namespace _2DV610FikaApi.Tests
         {
             int existingId = 1;
             int nonExistingId = 2;
-            Baker expectedBaker = new Baker("Erik", "erik.magnusson@email.com");
-            expectedBaker.Id = existingId;
+            Baker existingBaker = new Baker("Erik", "erik.magnusson@email.com");
+            existingBaker.Id = existingId;
             _bakerMock
                 .Setup(bakerRepository => bakerRepository.GetBaker(existingId))
-                .Returns(expectedBaker);
+                .Returns(existingBaker);
 
             Baker baker = _bakerService.DeleteBaker(nonExistingId);
 
             Assert.IsNull(baker);
-            Assert.AreNotSame(expectedBaker, baker);
+            Assert.AreNotSame(existingBaker, baker);
         }
 
         [TestMethod]

@@ -128,5 +128,10 @@ namespace _2DV610FikaApi.Tests.Controllers
             _service
                 .Verify(service => service.DeleteBaker(It.IsAny<int>()), Times.Once);
         }
+
+        [TestMethod]
+        public void BakerControllerActionDeleteBakerReturnsStatusCodeOkIfBakerToDeleteExists()
+        {
+        }
     }
 }
