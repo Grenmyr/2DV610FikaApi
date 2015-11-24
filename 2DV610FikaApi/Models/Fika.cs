@@ -27,5 +27,7 @@ namespace _2DV610FikaApi.Models
                 _pastry = value;
             }
         }
+
+        public int Id { get; set; }
     }
 }

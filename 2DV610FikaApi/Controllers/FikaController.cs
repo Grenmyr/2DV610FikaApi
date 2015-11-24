@@ -45,9 +45,10 @@ namespace _2DV610FikaApi.Controllers
             return Ok(fika);
         }
 
-        public void Post(Fika fika) 
+        public IHttpActionResult Post(Fika fika) 
         {
-            _service.AddFika(fika);
+            return CreatedAtRoute("Default Api", new { id = fika.Id }, _service.AddFika(fika));
+ 
         }
     }
 }
