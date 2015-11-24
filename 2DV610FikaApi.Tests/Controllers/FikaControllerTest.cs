@@ -115,8 +115,9 @@ namespace _2DV610FikaApi.Tests
         public void FikaControllerPostShouldInvokeCallToServiceAddFika()
         {
             Fika fika = new Fika();
-
             FikaController controller = new FikaController(_service.Object);
+            
+            controller.Post(fika);
 
             _service.Verify(s => s.AddFika(fika), Times.Once);
         }
