@@ -16,6 +16,6 @@ namespace _2DV610FikaApi
 
         Fika GetFikaById(int id);
 
-        void AddFika(Fika fika);
+        Fika AddFika(Fika fika);
     }
 }

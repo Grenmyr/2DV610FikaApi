@@ -58,7 +58,7 @@ namespace _2DV610FikaApi
             throw new NotImplementedException();
         }
 
-        public void AddFika(Fika fika)
+        public Fika AddFika(Fika fika)
         {
             throw new NotImplementedException();
         }

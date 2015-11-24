@@ -121,6 +121,22 @@ namespace _2DV610FikaApi.Tests
 
             _service.Verify(s => s.AddFika(fika), Times.Once);
         }
+
+        [TestMethod]
+        public void FikaControllerPostshouldReturnCreatedAtRouteNegotiatedContentResultOnSuccesfulPost()
+        {
+            Fika fika = new Fika();
+            fika.Date = new DateTime();
+            fika.Pastry = "NewPastry";
+
+            _service.Setup(s => s.AddFika(fika)).Returns(fika);
+            FikaController controller = new FikaController(_service.Object);
+
+
+            CreatedAtRouteNegotiatedContentResult<Fika> result = controller.Post(fika) as CreatedAtRouteNegotiatedContentResult<Fika>;
+
+            Assert.AreEqual(fika, result.Content);
+        }
     
     }
 }
