@@ -50,7 +50,7 @@ namespace _2DV610FikaApi
 
         public Baker AddBaker(Baker baker)
         {
-            throw new NotImplementedException();
+            return _bakerRepository.AddBaker(baker);
         }
 
         public Fika GetFikaById(int id)
