@@ -90,5 +90,13 @@ namespace _2DV610FikaApi.Tests
             Assert.IsNotNull(result);
             Assert.AreEqual(expectedList.Count, result.Count);
         }
+
+        [TestMethod]
+        public void ServicePostBakerShouldInvokeRepositoryPostBakerOnce()
+        {
+            _bakerService.AddBaker(It.IsAny<Baker>());
+
+            _bakerMock.Verify(bakerRepository => bakerRepository.AddBaker(It.IsAny<Baker>()), Times.Once);
+        }
     }
 }
