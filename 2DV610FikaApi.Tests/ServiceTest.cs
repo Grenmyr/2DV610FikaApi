@@ -166,9 +166,17 @@ namespace _2DV610FikaApi.Tests
         [TestMethod]
         public void BakerRepositoryDeleteBakerShouldBeInvokedOnceWhenBakerServiceDeleteMethodIsCalled()
         {
-            _bakerService.DeleteBaker(It.IsAny<int>());
+            int existingId = 1;
+            Baker expectedBaker = new Baker("Erik", "erik.magnusson@email.com");
+            expectedBaker.Id = existingId;
 
-            _bakerMock.Verify(bakerRepository => bakerRepository.DeleteBaker(It.IsAny<Baker>()), Times.Once);
+            _bakerMock
+            .Setup(bakerRepository => bakerRepository.GetBaker(existingId))
+            .Returns(expectedBaker);
+
+            _bakerService.DeleteBaker(existingId);
+
+            _bakerMock.Verify(bakerRepository => bakerRepository.DeleteBaker(expectedBaker), Times.Once);
         }
     }
 }
