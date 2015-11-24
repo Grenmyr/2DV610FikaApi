@@ -42,8 +42,7 @@ namespace _2DV610FikaApi.Controllers
 
         public IHttpActionResult Delete(int id)
         {
-            Baker baker = _service.DeleteBaker(id);
-            return Ok();
+            throw new NotImplementedException();
         }
     }
 }

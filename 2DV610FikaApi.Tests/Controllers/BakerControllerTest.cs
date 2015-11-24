@@ -132,6 +132,16 @@ namespace _2DV610FikaApi.Tests.Controllers
         [TestMethod]
         public void BakerControllerActionDeleteBakerReturnsStatusCodeOkIfBakerToDeleteExists()
         {
+            int existingId = 1;
+            Baker existingBaker = new Baker("Erik", "erik.magnusson@email.com");
+            _service
+                .Setup(service => service.DeleteBaker(existingId))
+                .Returns(existingBaker);
+            BakerController controller = new BakerController(_service.Object);
+
+            IHttpActionResult result = controller.Delete(existingId);
+
+            Assert.IsInstanceOfType(result, typeof(OkResult));
         }
     }
 }
