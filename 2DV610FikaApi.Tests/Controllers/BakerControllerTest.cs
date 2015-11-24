@@ -130,7 +130,7 @@ namespace _2DV610FikaApi.Tests.Controllers
         }
 
         [TestMethod]
-        public void BakerControllerActionDeleteBakerReturnsStatusCodeOkIfBakerToDeleteExists()
+        public void BakerControllerActionDeleteReturnsStatusCodeOkIfBakerToDeleteExists()
         {
             int existingId = 1;
             Baker existingBaker = new Baker("Erik", "erik.magnusson@email.com");
