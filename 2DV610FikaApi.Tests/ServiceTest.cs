@@ -164,6 +164,22 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
+        public void ServiceDeleteBakerMethodReturnsNullForNonExistingId()
+        {
+            int existingId = 1;
+            int nonExistingId = 2;
+            Baker expectedBaker = new Baker("Erik", "erik.magnusson@email.com");
+            expectedBaker.Id = existingId;
+            _bakerMock
+                .Setup(bakerRepository => bakerRepository.GetBaker(existingId))
+                .Returns(expectedBaker);
+
+            Baker baker = _bakerService.DeleteBaker(nonExistingId);
+
+            Assert.AreSame(expectedBaker, baker);
+        }
+
+        [TestMethod]
         public void BakerRepositoryDeleteBakerShouldBeInvokedOnceWhenBakerServiceDeleteMethodIsCalled()
         {
             int existingId = 1;
