@@ -47,18 +47,12 @@ namespace _2DV610FikaApi.Controllers
 
         public IHttpActionResult Post(Fika fika) 
         {
-            Fika copyOfFika = new Fika();
-            try
-            {          
-                copyOfFika.Pastry = fika.Pastry;
-                copyOfFika.Date = fika.Date;
-            }
-            catch (ArgumentException)
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            
-            return CreatedAtRoute("Default Api", new { id = copyOfFika.Id }, _service.AddFika(copyOfFika));
+
+            return CreatedAtRoute("Default Api", new { id = fika.Id }, _service.AddFika(fika));
         }
     }
 }
