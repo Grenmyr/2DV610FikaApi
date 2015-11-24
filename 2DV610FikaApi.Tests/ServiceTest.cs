@@ -92,7 +92,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void ServicePostBakerShouldInvokeRepositoryPostBakerOnce()
+        public void ServiceAddBakerShouldInvokeRepositoryPostBakerOnce()
         {
             _bakerService.AddBaker(It.IsAny<Baker>());
 
@@ -100,7 +100,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void ServicePostBakerShouldReturnABaker()
+        public void ServiceAddBakerShouldReturnABaker()
         {
             Baker bakerToAdd = new Baker("Andreas", "andreas.fridlund@mail.com");
             _bakerMock
