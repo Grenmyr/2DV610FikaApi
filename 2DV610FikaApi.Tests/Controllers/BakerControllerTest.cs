@@ -143,5 +143,21 @@ namespace _2DV610FikaApi.Tests.Controllers
 
             Assert.IsInstanceOfType(result, typeof(OkResult));
         }
+
+        [TestMethod]
+        public void BakerControllerActionDeleteReturnsNotFoundOnNonExistingBaker()
+        {
+            int existingId = 1;
+            int nonExistingId = 2;
+            Baker existingBaker = new Baker("Erik", "erik.magnusson@email.com");
+            _service
+                .Setup(service => service.DeleteBaker(existingId))
+                .Returns(existingBaker);
+            BakerController controller = new BakerController(_service.Object);
+
+            IHttpActionResult result = controller.Delete(nonExistingId);
+
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+        }
     }
 }
