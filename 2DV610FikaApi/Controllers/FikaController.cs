@@ -44,5 +44,15 @@ namespace _2DV610FikaApi.Controllers
 
             return Ok(fika);
         }
+
+        public IHttpActionResult Post(Fika fika) 
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            return CreatedAtRoute("Default Api", new { id = fika.Id }, _service.AddFika(fika));
+        }
     }
 }

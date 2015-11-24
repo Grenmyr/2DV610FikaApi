@@ -110,6 +110,46 @@ namespace _2DV610FikaApi.Tests
 
             Assert.AreEqual(typeof(NotFoundResult), result.GetType());
         }
+
+        [TestMethod]
+        public void FikaControllerPostShouldInvokeCallToServiceAddFika()
+        {
+            Fika fika = new Fika();
+            FikaController controller = new FikaController(_service.Object);
+            
+            controller.Post(fika);
+
+            _service.Verify(s => s.AddFika(fika), Times.Once);
+        }
+
+        [TestMethod]
+        public void FikaControllerPostshouldReturnCreatedAtRouteNegotiatedContentResultOnSuccesfulPost()
+        {
+            Fika fika = new Fika();
+            fika.Date = new DateTime();
+            fika.Pastry = "NewPastry";
+
+            _service.Setup(s => s.AddFika(fika)).Returns(fika);
+            FikaController controller = new FikaController(_service.Object);
+
+
+            CreatedAtRouteNegotiatedContentResult<Fika> result = controller.Post(fika) as CreatedAtRouteNegotiatedContentResult<Fika>;
+
+            Assert.AreEqual(fika, result.Content);
+        }
+
+        [TestMethod]
+        public void FikaControllerShouldReturnBadRequestWhenModelStateIsNotValid()
+        {
+            Fika fika = new Fika();
+            FikaController controller = new FikaController(_service.Object);
+            controller.ModelState.AddModelError("", "an error");
+
+            BadRequestResult result = controller.Post(fika) as BadRequestResult;
+
+            Assert.AreEqual(typeof(BadRequestResult), result.GetType());
+            
+        }
     
     }
 }
