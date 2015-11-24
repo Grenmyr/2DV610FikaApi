@@ -110,6 +110,16 @@ namespace _2DV610FikaApi.Tests
 
             Assert.AreEqual(typeof(NotFoundResult), result.GetType());
         }
+
+        [TestMethod]
+        public void FikaControllerPostShouldInvokeCallToServiceAddFika()
+        {
+            Fika fika = new Fika();
+
+            FikaController controller = new FikaController(_service.Object);
+
+            _service.Verify(s => s.AddFika(fika), Times.Once);
+        }
     
     }
 }
