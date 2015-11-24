@@ -66,6 +66,12 @@ namespace _2DV610FikaApi
 
         public Baker DeleteBaker(int id)
         {
+            Baker baker = GetBaker(id);
+            if (baker != null)
+            {
+                _bakerRepository.DeleteBaker(baker);
+                return baker;
+            }
             throw new NotImplementedException();
         }
     }
