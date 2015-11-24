@@ -45,9 +45,9 @@ namespace _2DV610FikaApi.Controllers
             return Ok(fika);
         }
 
-        public IHttpActionResult Post(Fika fika) 
+        public void Post(Fika fika) 
         {
-            throw new NotFiniteNumberException();
+            _service.AddFika(fika);
         }
     }
 }
