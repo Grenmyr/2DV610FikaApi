@@ -40,7 +40,6 @@ namespace _2DV610FikaApi.Tests.Models
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void FikaPastryPropertyDoesNotAllowNullValues()
         {
             Fika fika = new Fika();
@@ -55,7 +54,6 @@ namespace _2DV610FikaApi.Tests.Models
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void FikaPastryPropertyDoesNotAllowEmtryStringValues()
         {
             Fika fika = new Fika();
