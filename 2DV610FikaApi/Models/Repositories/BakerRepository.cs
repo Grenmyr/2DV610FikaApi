@@ -22,5 +22,10 @@ namespace _2DV610FikaApi.Models.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteBaker(Baker baker)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

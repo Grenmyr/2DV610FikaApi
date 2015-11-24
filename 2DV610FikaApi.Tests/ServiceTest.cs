@@ -148,6 +148,52 @@ namespace _2DV610FikaApi.Tests
             Assert.AreSame(bakerToAdd, result);
         }
 
+        [TestMethod]
+        public void ServiceDeleteBakerMethodReturnsBakerForExistingId()
+        {
+            int existingId = 1;
+            Baker expectedBaker = new Baker("Erik", "erik.magnusson@email.com");
+            expectedBaker.Id = existingId;
+            _bakerMock
+                .Setup(bakerRepository => bakerRepository.GetBaker(existingId))
+                .Returns(expectedBaker);
 
+            Baker baker = _bakerService.DeleteBaker(existingId);
+
+            Assert.AreSame(expectedBaker, baker);
+        }
+
+        [TestMethod]
+        public void ServiceDeleteBakerMethodReturnsNullForNonExistingId()
+        {
+            int existingId = 1;
+            int nonExistingId = 2;
+            Baker existingBaker = new Baker("Erik", "erik.magnusson@email.com");
+            existingBaker.Id = existingId;
+            _bakerMock
+                .Setup(bakerRepository => bakerRepository.GetBaker(existingId))
+                .Returns(existingBaker);
+
+            Baker baker = _bakerService.DeleteBaker(nonExistingId);
+
+            Assert.IsNull(baker);
+            Assert.AreNotSame(existingBaker, baker);
+        }
+
+        [TestMethod]
+        public void BakerRepositoryDeleteBakerShouldBeInvokedOnceWhenBakerServiceDeleteMethodIsCalled()
+        {
+            int existingId = 1;
+            Baker expectedBaker = new Baker("Erik", "erik.magnusson@email.com");
+            expectedBaker.Id = existingId;
+
+            _bakerMock
+            .Setup(bakerRepository => bakerRepository.GetBaker(existingId))
+            .Returns(expectedBaker);
+
+            _bakerService.DeleteBaker(existingId);
+
+            _bakerMock.Verify(bakerRepository => bakerRepository.DeleteBaker(expectedBaker), Times.Once);
+        }
     }
 }
