@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using _2DV610FikaApi.Models;
 using Moq;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace _2DV610FikaApi.Tests.Models
 {
@@ -45,6 +46,12 @@ namespace _2DV610FikaApi.Tests.Models
             Fika fika = new Fika();
 
             fika.Pastry = null;
+
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+            bool actual = Validator.TryValidateObject(fika, new ValidationContext(fika), validationResults, true);
+
+            Assert.IsFalse(actual);
+            Assert.AreEqual(1, validationResults.Count);
         }
 
         [TestMethod]
@@ -54,15 +61,26 @@ namespace _2DV610FikaApi.Tests.Models
             Fika fika = new Fika();
             
             fika.Pastry = String.Empty;
+
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+            bool actual = Validator.TryValidateObject(fika, new ValidationContext(fika), validationResults, true);
+
+            Assert.IsFalse(actual);
+            Assert.AreEqual(1, validationResults.Count);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
         public void FikaPastryPropertyDoesNotAllowStringsLongerThen30CharactersLength()
         {
             Fika fika = new Fika();
 
             fika.Pastry = "ThisisExactlythritytwocharacters";
+
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+            bool actual = Validator.TryValidateObject(fika, new ValidationContext(fika), validationResults, true);
+ 
+            Assert.IsFalse(actual);
+            Assert.AreEqual(1, validationResults.Count);
         }
     }
 }
