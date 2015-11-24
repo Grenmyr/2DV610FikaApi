@@ -15,7 +15,8 @@ namespace _2DV610FikaApi
         Baker AddBaker(Baker baker);
 
         Fika GetFikaById(int id);
-
         Fika AddFika(Fika fika);
+
+        Baker DeleteBaker(int id);
     }
 }

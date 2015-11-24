@@ -58,7 +58,13 @@ namespace _2DV610FikaApi
             throw new NotImplementedException();
         }
 
+
         public Fika AddFika(Fika fika)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Baker DeleteBaker(int id)
         {
             throw new NotImplementedException();
         }

@@ -117,5 +117,16 @@ namespace _2DV610FikaApi.Tests.Controllers
             Assert.AreSame(baker.Content, bakerToAdd);
             Assert.AreEqual(baker.Content.Email, bakerToAdd.Email);
         }
+
+        [TestMethod]
+        public void BakerServiceDeleteBakerShouldBeInvokedOnceWhenBakerControllerDeleteActionIsCalled()
+        {
+            BakerController controller = new BakerController(_service.Object);
+
+            controller.Delete(It.IsAny<int>());
+
+            _service
+                .Verify(service => service.DeleteBaker(It.IsAny<int>()), Times.Once);
+        }
     }
 }

@@ -148,6 +148,27 @@ namespace _2DV610FikaApi.Tests
             Assert.AreSame(bakerToAdd, result);
         }
 
+        [TestMethod]
+        public void ServiceDeleteBakerMethodReturnsBakerForExistingId()
+        {
+            int existingId = 1;
+            Baker expectedBaker = new Baker("Erik", "erik.magnusson@email.com");
+            expectedBaker.Id = existingId;
+            _bakerMock
+                .Setup(bakerRepository => bakerRepository.GetBaker(existingId))
+                .Returns(expectedBaker);
 
+            Baker baker = _bakerService.DeleteBaker(existingId);
+
+            Assert.AreSame(expectedBaker, baker);
+        }
+
+        [TestMethod]
+        public void BakerRepositoryDeleteBakerShouldBeInvokedOnceWhenBakerServiceDeleteMethodIsCalled()
+        {
+            _bakerService.DeleteBaker(It.IsAny<int>());
+
+            _bakerMock.Verify(bakerRepository => bakerRepository.DeleteBaker(It.IsAny<Baker>()), Times.Once);
+        }
     }
 }

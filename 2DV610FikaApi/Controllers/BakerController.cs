@@ -27,7 +27,7 @@ namespace _2DV610FikaApi.Controllers
         {
             var baker = _service.GetBaker(id);
 
-            if (baker == null) 
+            if (baker == null)
             {
                 return NotFound();
             }
@@ -38,6 +38,11 @@ namespace _2DV610FikaApi.Controllers
         public IHttpActionResult Post(Baker baker)
         {
             return CreatedAtRoute("Default Api", new { id = baker.Id }, _service.AddBaker(baker));
+        }
+
+        public IHttpActionResult Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
