@@ -232,11 +232,18 @@ namespace _2DV610FikaApi.Tests
             Assert.AreSame(updatedBaker, baker);
         }
         [TestMethod]
-        public void ServiceGetFikahouldInvokeRespoistoryGetFikaOnce()
+        public void ServiceGetFikahouldInvokeRespoistoryGetFikaOnceAndReturnsTheMockedFika()
         {
-             _fikaService.GetFika(It.IsAny<int>());
-
-             _fikaMock.Verify(fr => fr.GetFika(It.IsAny<int>()), Times.Once);
+            Fika fika = new Fika();
+            fika.Pastry = "Drömmar";
+            _fikaMock.Setup(fm => fm.GetFika(55)).Returns(fika);
+            
+            Fika result = _fikaService.GetFika(55);
+             
+            _fikaMock.Verify(fr => fr.GetFika(55), Times.Once);
+            Assert.AreEqual(fika.Pastry,result.Pastry );      
         }
+
+
     }
 }
