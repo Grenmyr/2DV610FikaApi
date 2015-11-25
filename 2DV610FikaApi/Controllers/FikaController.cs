@@ -58,9 +58,9 @@ namespace _2DV610FikaApi.Controllers
             return CreatedAtRoute("Default Api", new { id = fika.Id }, _service.AddFika(fika));
         }
 
-        public System.Web.Http.Results.OkResult Delete(int p)
+        public IHttpActionResult Delete(int p)
         {
-            throw new NotImplementedException();
+            return Ok();
         }
     }
 }
