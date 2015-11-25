@@ -203,6 +203,19 @@ namespace _2DV610FikaApi.Tests
 
             _service.Verify(s => s.PutFika(fika), Times.Once);
         }
+
+        [TestMethod]
+        public void FikaControllerPutShouldOnSuccesfulPutReturnOkNegotiatedContentResultContaniningUpdatedFika()
+        {
+            Fika fika = new Fika();
+            _service.Setup(s => s.PutFika(fika)).Returns(fika);
+            FikaController controller = new FikaController(_service.Object);
+
+            IHttpActionResult result = controller.Put(fika);
+
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Fika>));
+            Assert.ReferenceEquals(fika, result);
+        }
         
     }
 }
