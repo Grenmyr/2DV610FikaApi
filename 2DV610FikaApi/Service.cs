@@ -87,8 +87,8 @@ namespace _2DV610FikaApi
 
         public Baker PutBaker(int id)
         {
-            Baker baker = GetBaker(id);
-            return _bakerRepository.PutBaker(baker);
+            throw new NotImplementedException();
+
         }
     }
 }
