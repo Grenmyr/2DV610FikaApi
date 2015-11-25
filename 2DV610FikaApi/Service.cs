@@ -55,7 +55,7 @@ namespace _2DV610FikaApi
 
         public Fika GetFika(int id)
         {
-            throw new NotImplementedException();
+            return _fikaRepository.GetFika(id);
         }
 
 
