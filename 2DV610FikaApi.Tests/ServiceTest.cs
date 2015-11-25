@@ -213,9 +213,10 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void ServicePutBakerMethodShouldReturnBakerForExistingId()
+        public void ServicePutBakerMethodShouldReturnUpdatedBakerForExistingIdOrNullForNonExistingId()
         {
             int existingId = 1;
+            int nonExistingId = 2;
             Baker existingBaker = new Baker("Andreas", "andreas.fridlund@mail.com");
             Baker updatedBaker = new Baker("Andreas Fridlund", "andreas.fridlund@mail.com");
             existingBaker.Id = existingId;
@@ -228,8 +229,10 @@ namespace _2DV610FikaApi.Tests
                 .Returns(updatedBaker);
 
             Baker baker = _bakerService.PutBaker(existingId);
+            Baker nullValue = _bakerService.PutBaker(nonExistingId);
 
             Assert.AreSame(updatedBaker, baker);
+            Assert.IsNull(nullValue);
         }
 
         [TestMethod]
