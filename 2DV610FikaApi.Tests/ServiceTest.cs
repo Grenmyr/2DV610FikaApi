@@ -231,5 +231,10 @@ namespace _2DV610FikaApi.Tests
 
             Assert.AreSame(updatedBaker, baker);
         }
+
+        public void ServiceGetFikaByIdShouldInvokeRespoistory()
+        {
+
+        }
     }
 }

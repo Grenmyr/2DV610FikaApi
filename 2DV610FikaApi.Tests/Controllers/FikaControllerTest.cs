@@ -85,13 +85,13 @@ namespace _2DV610FikaApi.Tests
 
             controller.Get(88);
 
-            _service.Verify((s => s.GetFikaById(88)),Times.Once);
+            _service.Verify((s => s.GetFika(88)),Times.Once);
         }
 
         [TestMethod]
         public void FikaControllerGetWithIntIdParameterShouldReturnOkNegotiatedContentResultWithFika()
         {
-            _service.Setup(s => s.GetFikaById(8888)).Returns(new Fika());
+            _service.Setup(s => s.GetFika(8888)).Returns(new Fika());
             FikaController controller = new FikaController(_service.Object);
 
             IHttpActionResult result = controller.Get(8888);
@@ -103,7 +103,7 @@ namespace _2DV610FikaApi.Tests
         public void FikaControllerGetWithIntIdParameterShouldReturnNotFoundifServiceReturnsNull()
         {
             Fika fika = null;
-            _service.Setup(s => s.GetFikaById(8)).Returns(fika);
+            _service.Setup(s => s.GetFika(8)).Returns(fika);
             FikaController controller = new FikaController(_service.Object);
 
             IHttpActionResult result = controller.Get(8);
