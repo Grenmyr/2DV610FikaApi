@@ -68,5 +68,10 @@ namespace _2DV610FikaApi.Controllers
             }
             return Ok();
         }
+
+        public IHttpActionResult Put(Fika fika)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

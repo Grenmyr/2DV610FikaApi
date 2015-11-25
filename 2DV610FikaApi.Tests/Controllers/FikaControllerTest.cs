@@ -180,5 +180,16 @@ namespace _2DV610FikaApi.Tests
 
             Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
+
+        [TestMethod]
+        public void FikaControllerPutShouldReturnBadRequestWhenModelStateIsNotValid()
+        {
+            FikaController controller = new FikaController(_service.Object);
+            controller.ModelState.AddModelError("", "an error");
+
+            IHttpActionResult result = controller.Put(new Fika());
+
+            Assert.IsInstanceOfType(result, typeof(BadRequestResult));
+        }
     }
 }
