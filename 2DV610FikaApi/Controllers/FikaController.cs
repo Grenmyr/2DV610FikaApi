@@ -61,6 +61,7 @@ namespace _2DV610FikaApi.Controllers
         public IHttpActionResult Delete(int id)
         {
             Fika fika = _service.DeleteFika(id);
+
             if (fika == null)
             {
                 return NotFound();
