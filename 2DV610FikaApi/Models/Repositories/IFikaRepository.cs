@@ -10,5 +10,7 @@ namespace _2DV610FikaApi.Models.Repositories
     public interface IFikaRepository
     {
         List<Fika> GetFikas();
+
+        Fika GetFika(int id);
     }
 }
