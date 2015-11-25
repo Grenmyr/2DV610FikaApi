@@ -15,5 +15,7 @@ namespace _2DV610FikaApi.Models.Repositories
         Baker AddBaker(Baker baker);
 
         void DeleteBaker(Baker baker);
+
+        Baker PutBaker(Baker baker);
     }
 }

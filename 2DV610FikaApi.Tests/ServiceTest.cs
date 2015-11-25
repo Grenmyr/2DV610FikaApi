@@ -195,5 +195,21 @@ namespace _2DV610FikaApi.Tests
 
             _bakerMock.Verify(bakerRepository => bakerRepository.DeleteBaker(expectedBaker), Times.Once);
         }
+
+        [TestMethod]
+        public void BakerRepositoryPutMethodShouldBeInvokedOnceWhenBakerServicePutMethodIsCalled()
+        {
+            int existingId = 1;
+            Baker expectedBaker = new Baker("Andreas", "andreas.fridlund@mail.com");
+            expectedBaker.Id = existingId;
+
+            _bakerMock
+                .Setup(bakerRepository => bakerRepository.GetBaker(existingId))
+                .Returns(expectedBaker);
+
+            _bakerService.PutBaker(existingId);
+
+            _bakerMock.Verify(bakerRepository => bakerRepository.PutBaker(expectedBaker), Times.Once);
+        }
     }
 }

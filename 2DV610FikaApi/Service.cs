@@ -79,7 +79,13 @@ namespace _2DV610FikaApi
             throw new NotImplementedException();
         }
 
+
         public Fika PutFika(Fika fika)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Baker PutBaker(int id)
         {
             throw new NotImplementedException();
         }
