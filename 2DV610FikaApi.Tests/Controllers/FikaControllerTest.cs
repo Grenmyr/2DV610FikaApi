@@ -71,8 +71,8 @@ namespace _2DV610FikaApi.Tests
             _service
                 .Setup(service => service.GetFikas())
                 .Returns(nullList);
-
             FikaController controller = new FikaController(_service.Object);
+            
             NotFoundResult result = controller.Get() as NotFoundResult;
 
             Assert.AreEqual(typeof(NotFoundResult), result.GetType());
@@ -128,10 +128,8 @@ namespace _2DV610FikaApi.Tests
             Fika fika = new Fika();
             fika.Date = new DateTime();
             fika.Pastry = "NewPastry";
-
             _service.Setup(s => s.AddFika(fika)).Returns(fika);
             FikaController controller = new FikaController(_service.Object);
-
 
             CreatedAtRouteNegotiatedContentResult<Fika> result = controller.Post(fika) as CreatedAtRouteNegotiatedContentResult<Fika>;
 
@@ -139,7 +137,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void FikaControllerShouldReturnBadRequestWhenModelStateIsNotValid()
+        public void FikaControllerPostShouldReturnBadRequestWhenModelStateIsNotValid()
         {
             Fika fika = new Fika();
             FikaController controller = new FikaController(_service.Object);
@@ -147,9 +145,40 @@ namespace _2DV610FikaApi.Tests
 
             BadRequestResult result = controller.Post(fika) as BadRequestResult;
 
-            Assert.AreEqual(typeof(BadRequestResult), result.GetType());
-            
+            Assert.AreEqual(typeof(BadRequestResult), result.GetType());         
         }
-    
+
+        [TestMethod]
+        public void FikaControllerDeleteShouldReturnOkResult()
+        {
+            FikaController controller = new FikaController(_service.Object);
+            _service.Setup(s => s.DeleteFika(8888)).Returns(new Fika());
+            OkResult result = controller.Delete(8888) as OkResult;
+
+            Assert.AreEqual(typeof(OkResult), result.GetType());
+        }
+
+        [TestMethod]
+        public void FikaControllerDeleteShouldInvokeCallToServiceDeleteFika()
+        {
+            FikaController controller = new FikaController(_service.Object);
+
+            controller.Delete(8888);
+
+            _service.Verify(s => s.DeleteFika(8888),Times.Once);
+        }
+
+        [TestMethod]
+        public void FikaControllerDeleteShouldReturnNotFoundIfServiceReturnsNull()
+        {
+            // Rule in service is if Fika returned is Null, It was not found.
+            Fika fika = (Fika)null;
+            FikaController controller = new FikaController(_service.Object);
+            _service.Setup(s => s.DeleteFika(88)).Returns(fika);
+
+            IHttpActionResult result = controller.Delete(88) ;
+
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+        }
     }
 }
