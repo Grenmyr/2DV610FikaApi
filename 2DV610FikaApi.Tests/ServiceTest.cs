@@ -352,6 +352,8 @@ namespace _2DV610FikaApi.Tests
             Assert.AreEqual(updatedFika, result );
             Assert.AreNotSame(fika.Date, result.Date);
             Assert.AreNotSame(fika.Pastry, result.Pastry);
+            _fikaMock.Verify(fm => fm.GetFika(1),Times.Once);
+            _fikaMock.Verify(fm => fm.AddFika(fika),Times.Once);
         }
 
     }
