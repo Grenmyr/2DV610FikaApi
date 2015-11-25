@@ -89,8 +89,8 @@ namespace _2DV610FikaApi
 
         public Fika PutFika(Fika fika)
         {
-            _fikaRepository.GetFika(fika.Id);
-            return null;
+            Fika f = _fikaRepository.GetFika(fika.Id);
+            return _fikaRepository.AddFika(f);
         }
 
         public Baker PutBaker(int id)
