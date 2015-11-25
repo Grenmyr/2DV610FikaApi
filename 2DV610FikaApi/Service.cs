@@ -76,7 +76,8 @@ namespace _2DV610FikaApi
 
         public Fika DeleteFika(int id)
         {
-            throw new NotImplementedException();
+            _fikaRepository.GetFika(id);
+            return null;
         }
 
 
