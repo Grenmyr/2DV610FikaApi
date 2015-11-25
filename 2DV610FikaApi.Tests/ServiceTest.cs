@@ -316,5 +316,14 @@ namespace _2DV610FikaApi.Tests
             Assert.AreEqual(8888, result.Id);
         }
 
+        [TestMethod]
+        public void ServicePutFikaShouldInvoteFikaRepositoryGetFikaOnce()
+        {
+            Fika fika = new Fika {Id = 5};
+            _fikaService.PutFika(fika);
+
+            _fikaMock.Verify(fm => fm.GetFika(5), Times.Once);
+        }
+
     }
 }
