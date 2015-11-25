@@ -268,9 +268,9 @@ namespace _2DV610FikaApi.Tests
 
             Fika result = _fikaService.AddFika(fika);
 
-            Assert.AreSame("drömmar", result.Pastry);
-            Assert.AreSame(8888, result.Id);
-            Assert.AreSame(DateTime.Today.Day, result.Date.Day);
+            Assert.AreEqual("drömmar", result.Pastry);
+            Assert.AreEqual(8888, result.Id);
+            Assert.AreEqual(DateTime.Today.Day, result.Date.Day);
         }
 
 

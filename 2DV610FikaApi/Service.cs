@@ -61,7 +61,7 @@ namespace _2DV610FikaApi
 
         public Fika AddFika(Fika fika)
         {
-            throw new NotImplementedException();
+            return _fikaRepository.AddFika(fika);
         }
 
         public Baker DeleteBaker(int id)
