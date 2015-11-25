@@ -71,6 +71,10 @@ namespace _2DV610FikaApi.Controllers
 
         public IHttpActionResult Put(Fika fika)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
             throw new NotImplementedException();
         }
     }

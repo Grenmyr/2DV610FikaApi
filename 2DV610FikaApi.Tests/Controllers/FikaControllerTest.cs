@@ -45,9 +45,9 @@ namespace _2DV610FikaApi.Tests
                 .Returns(list);
             FikaController controller = new FikaController(_service.Object);
 
-            OkNegotiatedContentResult<List<Fika>> result = controller.Get() as OkNegotiatedContentResult<List<Fika>>;
+            IHttpActionResult result = controller.Get();
 
-            Assert.AreEqual(typeof (OkNegotiatedContentResult<List<Fika>>), result.GetType());
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<List<Fika>>));
         }
 
         [TestMethod]
@@ -73,9 +73,9 @@ namespace _2DV610FikaApi.Tests
                 .Returns(nullList);
             FikaController controller = new FikaController(_service.Object);
             
-            NotFoundResult result = controller.Get() as NotFoundResult;
+            IHttpActionResult result = controller.Get();
 
-            Assert.AreEqual(typeof(NotFoundResult), result.GetType());
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
         [TestMethod]
@@ -94,9 +94,9 @@ namespace _2DV610FikaApi.Tests
             _service.Setup(s => s.GetFikaById(8888)).Returns(new Fika());
             FikaController controller = new FikaController(_service.Object);
 
-            OkNegotiatedContentResult<Fika> result = controller.Get(8888) as OkNegotiatedContentResult<Fika>;
+            IHttpActionResult result = controller.Get(8888);
 
-            Assert.AreEqual(typeof(OkNegotiatedContentResult<Fika>), result.GetType());
+            Assert.IsInstanceOfType(result, typeof(OkNegotiatedContentResult<Fika>));
         }
 
         [TestMethod]
@@ -106,9 +106,9 @@ namespace _2DV610FikaApi.Tests
             _service.Setup(s => s.GetFikaById(8)).Returns(fika);
             FikaController controller = new FikaController(_service.Object);
 
-            NotFoundResult result = controller.Get(8) as NotFoundResult;
+            IHttpActionResult result = controller.Get(8);
 
-            Assert.AreEqual(typeof(NotFoundResult), result.GetType());
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
         [TestMethod]
@@ -143,9 +143,9 @@ namespace _2DV610FikaApi.Tests
             FikaController controller = new FikaController(_service.Object);
             controller.ModelState.AddModelError("", "an error");
 
-            BadRequestResult result = controller.Post(fika) as BadRequestResult;
+            IHttpActionResult result = controller.Post(fika);
 
-            Assert.AreEqual(typeof(BadRequestResult), result.GetType());         
+            Assert.IsInstanceOfType(result, typeof(BadRequestResult));
         }
 
         [TestMethod]
@@ -153,9 +153,9 @@ namespace _2DV610FikaApi.Tests
         {
             FikaController controller = new FikaController(_service.Object);
             _service.Setup(s => s.DeleteFika(8888)).Returns(new Fika());
-            OkResult result = controller.Delete(8888) as OkResult;
+            IHttpActionResult result = controller.Delete(8888);
 
-            Assert.AreEqual(typeof(OkResult), result.GetType());
+            Assert.IsInstanceOfType(result, typeof(OkResult));
         }
 
         [TestMethod]
