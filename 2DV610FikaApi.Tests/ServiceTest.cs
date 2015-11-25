@@ -244,6 +244,35 @@ namespace _2DV610FikaApi.Tests
             Assert.AreEqual(fika.Pastry,result.Pastry );      
         }
 
+        [TestMethod]
+        public void ServiceAddFikaShouldInvokeRepositoryAddFikaOnce()
+        {
+            _fikaService.AddFika(It.IsAny<Fika>());
+
+            _fikaMock.Verify(fm => fm.AddFika(It.IsAny<Fika>()), Times.Once);
+        }
+
+        [TestMethod]
+        public void ServiceAddFikaShouldReturnTheSameFika()
+        {
+            Fika fika = new Fika()
+                {
+                    Pastry = "drömmar",
+                    Date = DateTime.Today,
+                    Id = 8888
+                };
+
+            _fikaMock
+                .Setup(fm => fm.AddFika(fika))
+                .Returns(fika);
+
+            Fika result = _fikaService.AddFika(fika);
+
+            Assert.AreSame("drömmar", result.Pastry);
+            Assert.AreSame(8888, result.Id);
+            Assert.AreSame(DateTime.Today.Day, result.Date.Day);
+        }
+
 
     }
 }
