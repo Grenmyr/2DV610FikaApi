@@ -231,5 +231,130 @@ namespace _2DV610FikaApi.Tests
 
             Assert.AreSame(updatedBaker, baker);
         }
+
+        [TestMethod]
+        public void ServiceGetFikahouldInvokeRespoistoryGetFikaOnceAndReturnsTheMockedFika()
+        {
+            Fika fika = new Fika();
+            fika.Pastry = "Drömmar";
+            _fikaMock.Setup(fm => fm.GetFika(55)).Returns(fika);
+            
+            Fika result = _fikaService.GetFika(55);
+             
+            _fikaMock.Verify(fr => fr.GetFika(55), Times.Once);
+            Assert.AreEqual(fika.Pastry,result.Pastry );      
+        }
+
+        [TestMethod]
+        public void ServiceAddFikaShouldInvokeRepositoryAddFikaOnce()
+        {
+            _fikaService.AddFika(It.IsAny<Fika>());
+
+            _fikaMock.Verify(fm => fm.AddFika(It.IsAny<Fika>()), Times.Once);
+        }
+
+        [TestMethod]
+        public void ServiceAddFikaShouldReturnTheSameFika()
+        {
+            Fika fika = new Fika()
+                {
+                    Pastry = "drömmar",
+                    Date = DateTime.Today,
+                    Id = 8888
+                };
+
+            _fikaMock
+                .Setup(fm => fm.AddFika(fika))
+                .Returns(fika);
+
+            Fika result = _fikaService.AddFika(fika);
+
+            Assert.AreEqual("drömmar", result.Pastry);
+            Assert.AreEqual(8888, result.Id);
+            Assert.AreEqual(DateTime.Today.Day, result.Date.Day);
+        }
+
+        [TestMethod]
+        public void ServiceDeleteFikaShouldInvokeFikaRepositoryGetFikaOnce()
+        {
+            _fikaService.DeleteFika(8888);
+
+            _fikaMock.Verify(fm => fm.GetFika(8888), Times.Once);
+        }
+
+        [TestMethod]
+        public void ServiceDeleteFikaShouldReturnTheDeletedBakerIfBakerWIthThatIdExist()
+        {
+            Fika fika = new Fika();
+            _fikaMock.Setup(fm => fm.GetFika(8888)).Returns(fika);
+
+            Fika result = _fikaService.DeleteFika(8888);
+
+            Assert.AreSame(fika, result);
+        }
+
+        [TestMethod]
+        public void ServiceDeleteFikaShouldReturnNullWhenNoFikaWithInvokedIdExist()
+        {
+            Fika fika = new Fika();
+            _fikaMock.Setup(fm => fm.GetFika(6666)).Returns(fika);
+
+            Fika result = _fikaService.DeleteFika(8888);
+
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void ServiceDeleteFikaShouldInvokeFikaRepositoryDeleteFikaOnceAndItReturnsCorrectID()
+        {
+            Fika fika = new Fika();
+            fika.Id = 8888;
+            _fikaMock.Setup(fm => fm.GetFika(8888)).Returns(fika);
+            
+            Fika result = _fikaService.DeleteFika(fika.Id);
+
+            _fikaMock.Verify(fm => fm.DeleteFika(result), Times.Once);
+            Assert.AreEqual(8888, result.Id);
+        }
+
+        [TestMethod]
+        public void ServicePutFikaShouldInvokeFikaRepositoryGetFikaOnce()
+        {
+            Fika fika = new Fika {Id = 5};
+            _fikaService.PutFika(fika);
+
+            _fikaMock.Verify(fm => fm.GetFika(5), Times.Once);
+        }
+
+        [TestMethod]
+        public void ServicePutFikaShouldInvokeFikaRepositoryGetFikaByIdAndThenUpdateIt()
+        {
+            Fika fika = new Fika 
+            { 
+                Pastry = "wow vilken chokladtårta",
+                Date = DateTime.Today.AddDays(-1),
+                Id = 1
+            };
+            Fika updatedFika = new Fika
+            {
+                Pastry = "Vilken äcklig chokladtårta",
+                Date = DateTime.Today
+            };
+            _fikaMock
+                .Setup(fm => fm.GetFika(fika.Id))
+                .Returns(fika);
+            _fikaMock
+                .Setup(fm => fm.AddFika(fika))
+                .Returns(updatedFika);
+
+            Fika result = _fikaService.PutFika(fika);
+
+            Assert.AreEqual(updatedFika, result );
+            Assert.AreNotSame(fika.Date, result.Date);
+            Assert.AreNotSame(fika.Pastry, result.Pastry);
+            _fikaMock.Verify(fm => fm.GetFika(1),Times.Once);
+            _fikaMock.Verify(fm => fm.AddFika(fika),Times.Once);
+        }
+
     }
 }

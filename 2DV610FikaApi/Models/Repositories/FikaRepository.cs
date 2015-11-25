@@ -12,5 +12,20 @@ namespace _2DV610FikaApi.Models.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public Fika GetFika(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Fika AddFika(Fika fika)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Fika DeleteFika(Fika fika)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

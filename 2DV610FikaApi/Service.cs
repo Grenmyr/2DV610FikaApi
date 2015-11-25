@@ -53,15 +53,15 @@ namespace _2DV610FikaApi
             return _bakerRepository.AddBaker(baker);
         }
 
-        public Fika GetFikaById(int id)
+        public Fika GetFika(int id)
         {
-            throw new NotImplementedException();
+            return _fikaRepository.GetFika(id);
         }
 
 
         public Fika AddFika(Fika fika)
         {
-            throw new NotImplementedException();
+            return _fikaRepository.AddFika(fika);
         }
 
         public Baker DeleteBaker(int id)
@@ -76,13 +76,21 @@ namespace _2DV610FikaApi
 
         public Fika DeleteFika(int id)
         {
-            throw new NotImplementedException();
+            Fika fika = _fikaRepository.GetFika(id);
+
+            if (fika != null)
+            {
+                _fikaRepository.DeleteFika(fika);
+            }
+
+            return fika;
         }
 
 
         public Fika PutFika(Fika fika)
         {
-            throw new NotImplementedException();
+            Fika f = _fikaRepository.GetFika(fika.Id);
+            return _fikaRepository.AddFika(f);
         }
 
         public Baker PutBaker(int id)
