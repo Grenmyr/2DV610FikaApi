@@ -213,7 +213,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void ServicePutBakerMethodShouldReturnBakerForExistingId()
+        public void ServicePutBakerMethodShouldReturnUpdatedBakerForExistingId()
         {
             int existingId = 1;
             Baker existingBaker = new Baker("Andreas", "andreas.fridlund@mail.com");
