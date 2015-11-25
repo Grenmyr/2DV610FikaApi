@@ -150,6 +150,14 @@ namespace _2DV610FikaApi.Tests
             Assert.AreEqual(typeof(BadRequestResult), result.GetType());
             
         }
-    
+
+        [TestMethod]
+        public void FikaControllerDeleteShouldReturnOkResult()
+        {
+            FikaController controller = new FikaController(_service.Object);
+            OkResult result = controller.Delete(8888) as OkResult;
+
+            Assert.AreEqual(typeof(OkResult), result.GetType());
+        }
     }
 }
