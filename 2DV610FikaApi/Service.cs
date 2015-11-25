@@ -80,7 +80,7 @@ namespace _2DV610FikaApi
 
             if (fika != null)
             {
-
+                _fikaRepository.DeleteFika(fika);
             }
 
             return fika;
