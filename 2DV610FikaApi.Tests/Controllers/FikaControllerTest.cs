@@ -198,7 +198,7 @@ namespace _2DV610FikaApi.Tests
             Fika fika = new Fika();
             FikaController controller = new FikaController(_service.Object);
 
-            controller.Post(fika);
+            controller.Put(fika);
 
             _service.Verify(s => s.PutFika(fika), Times.Once);
         }
