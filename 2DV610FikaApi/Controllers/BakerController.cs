@@ -54,7 +54,13 @@ namespace _2DV610FikaApi.Controllers
             {
                 return BadRequest();
             }
-            throw new NotImplementedException();
+
+            Baker existingBaker = _service.GetBaker(baker.Id);
+            if(existingBaker == null)
+            {
+                return NotFound();
+            }
+            return Ok(_service.PutBaker(baker.Id));
         }
 
         public IHttpActionResult Delete(int id)

@@ -107,8 +107,8 @@ namespace _2DV610FikaApi.Tests.Controllers
             Assert.IsNotNull(baker);
             Assert.IsNotNull(baker.Content);
             //TODO: Break out validation of data to two seperate tests.
-            Assert.AreSame(baker.Content, bakerToAdd);
-            Assert.AreEqual(baker.Content.Email, bakerToAdd.Email);
+            Assert.AreSame(bakerToAdd, baker.Content);
+            Assert.AreEqual(bakerToAdd.Email, baker.Content.Email);
         }
 
         [TestMethod]
@@ -127,10 +127,63 @@ namespace _2DV610FikaApi.Tests.Controllers
         {
             Baker baker = new Baker("Andreas", "andreas.fridlund@mail.com");
             _controller.ModelState.AddModelError("", "Error");
-
             IHttpActionResult result = _controller.Put(baker);
 
             Assert.IsInstanceOfType(result, typeof(BadRequestResult));
+        }
+
+        [TestMethod]
+        public void BakerServicePutBakerShouldBeInvokedOnceWhenBakerControllerPutActionIsCalled()
+        {
+            Baker baker = new Baker("David", "david.grenmyr@mail.com");
+            _service.Setup(service => service.GetBaker(It.IsAny<int>())).Returns(baker);
+            _controller.Put(baker);
+
+            _service
+                .Verify(service => service.PutBaker(It.IsAny<int>()), Times.Once);
+        }
+
+        [TestMethod]
+        public void BakerControllerPutMethodShouldReturnABakerAsContentForExistingIdAndStatusCodeOk()
+        {
+            int existingId = 1;
+            Baker existingBaker = new Baker("David", "david.grenmyr@mail.com");
+            existingBaker.Id = existingId;
+            Baker updatedBaker = new Baker("David Grenmyr", "david.grenmyr@mail.com");
+            updatedBaker.Id = existingId;
+            _service
+                .Setup(service => service.GetBaker(existingId))
+                .Returns(existingBaker);
+            _service
+                .Setup(service => service.PutBaker(existingId))
+                .Returns(updatedBaker);
+
+            var baker = _controller.Put(existingBaker) as OkNegotiatedContentResult<Baker>;
+
+            // Assert that status code is 200 Ok
+            Assert.IsNotNull(baker);
+            Assert.IsNotNull(baker.Content);
+            Assert.IsInstanceOfType(baker.Content, typeof(Baker));
+        }
+
+        [TestMethod]
+        public void BakerControllerPutMethodShouldReturnABakerAsContentForNonExistingIdAndStatusCodeNotFound()
+        {
+            int existingId = 1;
+            int nonExistingId = 2;
+            Baker existingBaker = new Baker("David", "david.grenmyr@mail.com");
+            existingBaker.Id = nonExistingId;
+            Baker updatedBaker = new Baker("David Grenmyr", "david.grenmyr@mail.com");
+            updatedBaker.Id = existingId;
+            _service
+                .Setup(service => service.GetBaker(existingId))
+                .Returns(existingBaker);
+            _service
+                .Setup(service => service.PutBaker(existingId))
+                .Returns(updatedBaker);
+
+            IHttpActionResult result = _controller.Put(existingBaker);
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
         }
 
         [TestMethod]
