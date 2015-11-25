@@ -293,7 +293,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void ServiceDeleteFikaShouldReturnNullIfIdDoesNotExist()
+        public void ServiceDeleteFikaShouldReturnNullWhenNoFikaWithInvokedIdExist()
         {
             Fika fika = new Fika();
             _fikaMock.Setup(fm => fm.GetFika(6666)).Returns(fika);
