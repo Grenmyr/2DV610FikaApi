@@ -133,7 +133,6 @@ namespace _2DV610FikaApi.Tests.Controllers
             Assert.IsInstanceOfType(result, typeof(BadRequestResult));
         }
 
-
         [TestMethod]
         public void BakerServiceDeleteBakerShouldBeInvokedOnceWhenBakerControllerDeleteActionIsCalled()
         {
