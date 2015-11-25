@@ -117,9 +117,9 @@ namespace _2DV610FikaApi.Tests.Controllers
             Baker baker = new Baker("Andreas", "andreas.fridlund@mail.com");
             _controller.ModelState.AddModelError("", "an error");
 
-            BadRequestResult result = _controller.Post(baker) as BadRequestResult;
+            IHttpActionResult result = _controller.Post(baker);
 
-            Assert.AreEqual(typeof(BadRequestResult), result.GetType());
+            Assert.IsInstanceOfType(result, typeof(BadRequestResult));
         }
 
         [TestMethod]
@@ -128,9 +128,9 @@ namespace _2DV610FikaApi.Tests.Controllers
             Baker baker = new Baker("Andreas", "andreas.fridlund@mail.com");
             _controller.ModelState.AddModelError("", "Error");
 
-            BadRequestResult result = _controller.Put(baker) as BadRequestResult;
+            IHttpActionResult result = _controller.Put(baker);
 
-            Assert.AreEqual(typeof(BadRequestResult), result.GetType());
+            Assert.IsInstanceOfType(result, typeof(BadRequestResult));
         }
 
         [TestMethod]
