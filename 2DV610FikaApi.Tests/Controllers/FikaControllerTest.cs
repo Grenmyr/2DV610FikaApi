@@ -191,5 +191,17 @@ namespace _2DV610FikaApi.Tests
 
             Assert.IsInstanceOfType(result, typeof(BadRequestResult));
         }
+
+        [TestMethod]
+        public void FikaControllerPutShouldInvokeServicePutFikas()
+        {
+            Fika fika = new Fika();
+            FikaController controller = new FikaController(_service.Object);
+
+            controller.Post(fika);
+
+            _service.Verify(s => s.PutFika(fika), Times.Once);
+        }
+        
     }
 }

@@ -20,5 +20,7 @@ namespace _2DV610FikaApi
         Baker DeleteBaker(int id);
 
         Fika DeleteFika(int id);
+
+        Fika PutFika(Fika id);
     }
 }
