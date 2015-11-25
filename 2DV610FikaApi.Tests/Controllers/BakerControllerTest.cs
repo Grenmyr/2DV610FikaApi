@@ -107,8 +107,8 @@ namespace _2DV610FikaApi.Tests.Controllers
             Assert.IsNotNull(baker);
             Assert.IsNotNull(baker.Content);
             //TODO: Break out validation of data to two seperate tests.
-            Assert.AreSame(baker.Content, bakerToAdd);
-            Assert.AreEqual(baker.Content.Email, bakerToAdd.Email);
+            Assert.AreSame(bakerToAdd, baker.Content);
+            Assert.AreEqual(bakerToAdd.Email, baker.Content.Email);
         }
 
         [TestMethod]
@@ -127,7 +127,6 @@ namespace _2DV610FikaApi.Tests.Controllers
         {
             Baker baker = new Baker("Andreas", "andreas.fridlund@mail.com");
             _controller.ModelState.AddModelError("", "Error");
-
             IHttpActionResult result = _controller.Put(baker);
 
             Assert.IsInstanceOfType(result, typeof(BadRequestResult));
