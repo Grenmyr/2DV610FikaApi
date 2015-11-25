@@ -184,16 +184,52 @@ namespace _2DV610FikaApi.Tests
         public void BakerRepositoryDeleteBakerShouldBeInvokedOnceWhenBakerServiceDeleteMethodIsCalled()
         {
             int existingId = 1;
-            Baker expectedBaker = new Baker("Erik", "erik.magnusson@email.com");
-            expectedBaker.Id = existingId;
+            Baker existingBaker = new Baker("Erik", "erik.magnusson@email.com");
+            existingBaker.Id = existingId;
 
             _bakerMock
             .Setup(bakerRepository => bakerRepository.GetBaker(existingId))
-            .Returns(expectedBaker);
+            .Returns(existingBaker);
 
             _bakerService.DeleteBaker(existingId);
 
-            _bakerMock.Verify(bakerRepository => bakerRepository.DeleteBaker(expectedBaker), Times.Once);
+            _bakerMock.Verify(bakerRepository => bakerRepository.DeleteBaker(existingBaker), Times.Once);
+        }
+
+        [TestMethod]
+        public void BakerRepositoryPutMethodShouldBeInvokedOnceWhenBakerServicePutMethodIsCalled()
+        {
+            int existingId = 1;
+            Baker existingBaker = new Baker("Andreas", "andreas.fridlund@mail.com");
+            existingBaker.Id = existingId;
+
+            _bakerMock
+                .Setup(bakerRepository => bakerRepository.GetBaker(existingId))
+                .Returns(existingBaker);
+
+            _bakerService.PutBaker(existingId);
+
+            _bakerMock.Verify(bakerRepository => bakerRepository.PutBaker(existingBaker), Times.Once);
+        }
+
+        [TestMethod]
+        public void ServicePutBakerMethodShouldReturnBakerForExistingId()
+        {
+            int existingId = 1;
+            Baker existingBaker = new Baker("Andreas", "andreas.fridlund@mail.com");
+            Baker updatedBaker = new Baker("Andreas Fridlund", "andreas.fridlund@mail.com");
+            existingBaker.Id = existingId;
+            _bakerMock
+                .Setup(bakerRepository => bakerRepository.GetBaker(existingId))
+                .Returns(existingBaker);
+
+            _bakerMock
+                .Setup(bakerRepository => bakerRepository.PutBaker(existingBaker))
+                .Returns(updatedBaker);
+
+            Baker baker = _bakerService.PutBaker(existingId);
+
+            Assert.AreSame(updatedBaker, baker);
         }
     }
 }

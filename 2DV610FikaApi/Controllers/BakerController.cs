@@ -34,7 +34,7 @@ namespace _2DV610FikaApi.Controllers
             {
                 return NotFound();
             }
-
+  
             return Ok(_service.GetBaker(id));
         }
 
