@@ -273,6 +273,14 @@ namespace _2DV610FikaApi.Tests
             Assert.AreEqual(DateTime.Today.Day, result.Date.Day);
         }
 
+        [TestMethod]
+        public void ServiceDeleteFikaShouldInvokeFikaRepositoryGetFikaOnce()
+        {
+            _fikaService.DeleteFika(8888);
+
+            _fikaMock.Verify(fm => fm.GetFika(8888), Times.Once);
+        }
+
 
     }
 }
