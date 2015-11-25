@@ -167,5 +167,18 @@ namespace _2DV610FikaApi.Tests
 
             _service.Verify(s => s.DeleteFika(8888),Times.Once);
         }
+
+        [TestMethod]
+        public void FikaControllerDeleteShouldReturnNotFoundIfServiceReturnsNull()
+        {
+            // Rule in service is if Fika returned is Null, It was not found.
+            Fika fika = (Fika)null;
+            FikaController controller = new FikaController(_service.Object);
+            _service.Setup(s => s.DeleteFika(88)).Returns(fika);
+
+            IHttpActionResult result = controller.Delete(88) ;
+
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+        }
     }
 }
