@@ -168,6 +168,26 @@ namespace _2DV610FikaApi.Tests.Controllers
         }
 
         [TestMethod]
+        public void BakerControllerPutMethodShouldReturnABakerAsContentForNonExistingIdAndStatusCodeNotFound()
+        {
+            int existingId = 1;
+            int nonExistingId = 2;
+            Baker existingBaker = new Baker("David", "david.grenmyr@mail.com");
+            existingBaker.Id = nonExistingId;
+            Baker updatedBaker = new Baker("David Grenmyr", "david.grenmyr@mail.com");
+            updatedBaker.Id = existingId;
+            _service
+                .Setup(service => service.GetBaker(existingId))
+                .Returns(existingBaker);
+            _service
+                .Setup(service => service.PutBaker(existingId))
+                .Returns(updatedBaker);
+
+            IHttpActionResult result = _controller.Put(existingBaker);
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+        }
+
+        [TestMethod]
         public void BakerServiceDeleteBakerShouldBeInvokedOnceWhenBakerControllerDeleteActionIsCalled()
         {
             _controller.Delete(It.IsAny<int>());
