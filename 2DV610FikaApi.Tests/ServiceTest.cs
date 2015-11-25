@@ -317,7 +317,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
-        public void ServicePutFikaShouldInvoteFikaRepositoryGetFikaOnce()
+        public void ServicePutFikaShouldInvokeFikaRepositoryGetFikaOnce()
         {
             Fika fika = new Fika {Id = 5};
             _fikaService.PutFika(fika);
