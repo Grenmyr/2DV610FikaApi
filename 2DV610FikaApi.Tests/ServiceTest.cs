@@ -303,6 +303,18 @@ namespace _2DV610FikaApi.Tests
             Assert.IsNull(result);
         }
 
+        [TestMethod]
+        public void ServiceDeleteFikaShouldInvokeFikaRepositoryDeleteFikaOnceAndItReturnsCorrectID()
+        {
+            Fika fika = new Fika();
+            fika.Id = 8888;
+            _fikaMock.Setup(fm => fm.GetFika(8888)).Returns(fika);
+            
+            Fika result = _fikaService.DeleteFika(fika.Id);
+
+            _fikaMock.Verify(fm => fm.DeleteFika(result), Times.Once);
+            Assert.AreEqual(8888, result.Id);
+        }
 
     }
 }
