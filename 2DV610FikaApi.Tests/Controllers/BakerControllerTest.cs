@@ -112,6 +112,28 @@ namespace _2DV610FikaApi.Tests.Controllers
         }
 
         [TestMethod]
+        public void BakerControllerPostShouldReturnBadRequestIfModelStateIsNotValid()
+        {
+            Baker baker = new Baker("Andreas", "andreas.fridlund@mail.com");
+            _controller.ModelState.AddModelError("", "an error");
+
+            IHttpActionResult result = _controller.Post(baker);
+
+            Assert.IsInstanceOfType(result, typeof(BadRequestResult));
+        }
+
+        [TestMethod]
+        public void BakerControllerPutShouldReturnBadRequestIfModelStateIsNotValid()
+        {
+            Baker baker = new Baker("Andreas", "andreas.fridlund@mail.com");
+            _controller.ModelState.AddModelError("", "Error");
+
+            IHttpActionResult result = _controller.Put(baker);
+
+            Assert.IsInstanceOfType(result, typeof(BadRequestResult));
+        }
+
+        [TestMethod]
         public void BakerServiceDeleteBakerShouldBeInvokedOnceWhenBakerControllerDeleteActionIsCalled()
         {
             _controller.Delete(It.IsAny<int>());
