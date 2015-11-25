@@ -231,6 +231,7 @@ namespace _2DV610FikaApi.Tests
 
             Assert.AreSame(updatedBaker, baker);
         }
+
         [TestMethod]
         public void ServiceGetFikahouldInvokeRespoistoryGetFikaOnceAndReturnsTheMockedFika()
         {
@@ -323,6 +324,34 @@ namespace _2DV610FikaApi.Tests
             _fikaService.PutFika(fika);
 
             _fikaMock.Verify(fm => fm.GetFika(5), Times.Once);
+        }
+
+        [TestMethod]
+        public void ServicePutFikaShouldInvokeFikaRepositoryGetFikaByIdAndThenUpdateIt()
+        {
+            Fika fika = new Fika 
+            { 
+                Pastry = "wow vilken chokladtårta",
+                Date = DateTime.Today.AddDays(-1),
+                Id = 1
+            };
+            Fika updatedFika = new Fika
+            {
+                Pastry = "Vilken äcklig chokladtårta",
+                Date = DateTime.Today
+            };
+            _fikaMock
+                .Setup(fm => fm.GetFika(fika.Id))
+                .Returns(fika);
+            _fikaMock
+                .Setup(fm => fm.AddFika(fika))
+                .Returns(updatedFika);
+
+            Fika result = _fikaService.PutFika(fika);
+
+            Assert.AreEqual(updatedFika, result );
+            Assert.AreNotSame(fika.Date, result.Date);
+            Assert.AreNotSame(fika.Pastry, result.Pastry);
         }
 
     }
