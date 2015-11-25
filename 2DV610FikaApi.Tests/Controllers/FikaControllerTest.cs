@@ -159,5 +159,15 @@ namespace _2DV610FikaApi.Tests
 
             Assert.AreEqual(typeof(OkResult), result.GetType());
         }
+
+        [TestMethod]
+        public void FikaControllerDeleteShouldInvokeCallToServiceDeleteFika()
+        {
+            FikaController controller = new FikaController(_service.Object);
+
+            controller.Delete(8888);
+
+            _service.Verify(s => s.DeleteFika(8888),Times.Once);
+        }
     }
 }

@@ -73,5 +73,10 @@ namespace _2DV610FikaApi
             }
             return baker;
         }
+
+        public Fika DeleteFika(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
