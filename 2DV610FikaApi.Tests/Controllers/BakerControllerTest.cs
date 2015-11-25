@@ -114,10 +114,21 @@ namespace _2DV610FikaApi.Tests.Controllers
         [TestMethod]
         public void BakerControllerPostShouldReturnBadRequestIfModelStateIsNotValid()
         {
-            Baker fika = new Baker("Andreas", "andreas.fridlund@mail.com");
+            Baker baker = new Baker("Andreas", "andreas.fridlund@mail.com");
             _controller.ModelState.AddModelError("", "an error");
 
-            BadRequestResult result = _controller.Post(fika) as BadRequestResult;
+            BadRequestResult result = _controller.Post(baker) as BadRequestResult;
+
+            Assert.AreEqual(typeof(BadRequestResult), result.GetType());
+        }
+
+        [TestMethod]
+        public void BakerControllerPutShouldReturnBadRequestIfModelStateIsNotValid()
+        {
+            Baker baker = new Baker("Andreas", "andreas.fridlund@mail.com");
+            _controller.ModelState.AddModelError("", "Error");
+
+            BadRequestResult result = _controller.Put(baker) as BadRequestResult;
 
             Assert.AreEqual(typeof(BadRequestResult), result.GetType());
         }

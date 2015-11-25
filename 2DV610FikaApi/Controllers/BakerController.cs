@@ -45,6 +45,11 @@ namespace _2DV610FikaApi.Controllers
             return CreatedAtRoute("Default Api", new { id = baker.Id }, _service.AddBaker(baker));
         }
 
+        public IHttpActionResult Put(Baker baker)
+        {
+            throw new NotImplementedException();
+        }
+
         public IHttpActionResult Delete(int id)
         {
             Baker baker = _service.DeleteBaker(id);
