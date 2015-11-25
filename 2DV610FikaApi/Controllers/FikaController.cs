@@ -75,6 +75,7 @@ namespace _2DV610FikaApi.Controllers
             {
                 return BadRequest();
             }
+            _service.PutFika(fika);
             throw new NotImplementedException();
         }
     }

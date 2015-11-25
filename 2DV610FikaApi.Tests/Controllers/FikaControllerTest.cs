@@ -193,6 +193,7 @@ namespace _2DV610FikaApi.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
         public void FikaControllerPutShouldInvokeServicePutFikas()
         {
             Fika fika = new Fika();
