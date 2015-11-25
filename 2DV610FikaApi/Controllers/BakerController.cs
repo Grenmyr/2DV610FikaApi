@@ -37,6 +37,11 @@ namespace _2DV610FikaApi.Controllers
 
         public IHttpActionResult Post(Baker baker)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             return CreatedAtRoute("Default Api", new { id = baker.Id }, _service.AddBaker(baker));
         }
 
